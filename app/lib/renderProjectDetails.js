@@ -1,4 +1,5 @@
 import { formatDistanceStrict, format } from "date-fns";
+import deleteProject from "./deleteProject";
 
 export default function renderProjectDetails(project) {
   // Select Kanboard and Project Details placeholders and toggle them on
@@ -139,5 +140,10 @@ export default function renderProjectDetails(project) {
   taskList.appendChild(taskPlaceholder);
 
   // Delete project
-  
+  document
+    .getElementById("project-delete-display")
+    .addEventListener("click", () => {
+      if (confirm("Are you sure you want to delete this project?"))
+        deleteProject(project._id);
+    });
 }
