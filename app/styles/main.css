@@ -1,0 +1,16 @@
+/* Logo icon and text fixes */
+span.logo-lg > img,
+span.logo-sm > img {
+  height: 30px;
+  background: yellow;
+}
+
+.logo .logo-lg-text-light {
+  text-transform: none !important;
+  vertical-align: middle;
+}
+
+/* Capitalize breadcrumbs */
+.breadcrumb-item {
+  text-transform: capitalize;
+}
