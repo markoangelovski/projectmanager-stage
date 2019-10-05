@@ -38,6 +38,11 @@ export default function projectDisplay(e) {
     // Set route to /projects
     //router({ projects: "projects" });
 
+    // Hide New Task buttons
+    document.querySelectorAll(".new-task").forEach(button => {
+      if (!button.classList.contains("d-none")) button.classList.add("d-none");
+    });
+
     // Set Overview title class to active
     document.getElementById("overview-link").className = "active";
 
@@ -61,6 +66,12 @@ export default function projectDisplay(e) {
   } else if (e.target.id.match(/^[a-f\d]{24}$/i) || e.target.dataset) {
     // Reset Overview title class
     document.getElementById("overview-link").className = "";
+
+    // Display New Task buttons
+    document.querySelectorAll(".new-task").forEach(button => {
+      if (button.classList.contains("d-none"))
+        button.classList.remove("d-none");
+    });
 
     // Reset Kanboard visibility
     kanboardPlaceholder.setAttribute("style", "display: flex");

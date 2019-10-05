@@ -6,12 +6,10 @@ export default async function getProjectDetails() {
     const { projectCount, projects } = await apiCall("projects");
     const { taskCount, tasks } = await apiCall("tasks");
 
-    if (projectCount > 0) {
-      localStorage.setItem("projectCount", projectCount);
-      localStorage.setItem("projects", JSON.stringify(projects));
-      localStorage.setItem("taskCount", taskCount);
-      localStorage.setItem("tasks", JSON.stringify(tasks));
-    }
+    localStorage.setItem("projectCount", projectCount);
+    localStorage.setItem("projects", JSON.stringify(projects));
+    localStorage.setItem("taskCount", taskCount);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   } catch (error) {
     console.warn(error);
   }
