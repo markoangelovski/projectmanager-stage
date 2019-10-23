@@ -10,6 +10,9 @@ const kanboardPlaceholder = document.getElementById("kanboard-placeholder");
 const projectDetailsPlaceholder = document.getElementById(
   "project-details-placeholder"
 );
+const taskDetailsPlaceholder = document.getElementById(
+  "task-details-placeholder"
+);
 
 // Set Kanboard title
 const projectCount = localStorage.getItem("projectCount");
@@ -49,6 +52,7 @@ export default function projectDisplay(e) {
     // Reset Kanboard visibility
     kanboardPlaceholder.setAttribute("style", "display: flex");
     projectDetailsPlaceholder.setAttribute("style", "display: none");
+    taskDetailsPlaceholder.setAttribute("style", "display: none");
 
     // Set Kanboard title
     kanboardTitlePlaceholder.appendChild(

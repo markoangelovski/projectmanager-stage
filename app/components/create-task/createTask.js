@@ -1,7 +1,9 @@
 const { api } = require(`../../../config/${process.env.API_CONFIG}`);
-import { formatDistanceStrict, format } from "date-fns";
+import { format } from "date-fns";
 import getProjectDetails from "../../lib/getProjectDetails";
+import renderProjectDetails from "../../lib/renderProjectDetails";
 
+// Get placeholders
 const project = document.getElementById("project-details-link");
 const title = document.getElementById("task-title");
 const description = document.getElementById("task-description");
@@ -25,7 +27,7 @@ document
 async function createTask(e) {
   e.preventDefault();
 
-  // Create project data payload
+  // Create task data payload
   const taskData = {
     project: project.dataset.anchor,
     title: title.value,
@@ -49,7 +51,6 @@ async function createTask(e) {
       body: JSON.stringify(taskData)
     }).then(res => res.json());
 
-    getProjectDetails();
     displayTaskDetails(taskResponse);
   } catch (error) {
     console.warn(error);
@@ -90,6 +91,27 @@ function displayTaskDetails(taskResponse) {
   const continueButton = document.getElementById("task-continue");
   continueButton.setAttribute("style", "display: block");
   continueButton.addEventListener("click", () => {
-    setTimeout(window.location.reload(true), 100);
+    // Select Kanboard and Project Details placeholders and toggle them on/off
+    const kanboardPlaceholder = document.getElementById("kanboard-placeholder");
+    const taskDetailsPlaceholder = document.getElementById(
+      "task-details-placeholder"
+    );
+
+    kanboardPlaceholder.setAttribute("style", "display: flex");
+    taskDetailsPlaceholder.setAttribute("style", "display: none");
+
+    // Re-fetch updated project details
+    getProjectDetails();
+
+    // Get project details from local storage
+    const selectedProjectfromLocal = JSON.parse(
+      localStorage.getItem("projects")
+    );
+    const selectedProject = selectedProjectfromLocal.find(
+      selectProject => selectProject._id === project.dataset.anchor
+    );
+
+    // Re-render project detalis
+    renderProjectDetails(selectedProject);
   });
 }

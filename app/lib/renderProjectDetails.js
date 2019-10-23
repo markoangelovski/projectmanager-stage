@@ -1,14 +1,18 @@
 import { formatDistanceStrict, format } from "date-fns";
 
 export default function renderProjectDetails(project) {
-  // Select Kanboard and Project Details placeholders and toggle them on
+  // Select Kanboard, Project and Task Details placeholders and toggle them on
   const kanboardPlaceholder = document.getElementById("kanboard-placeholder");
   const projectDetailsPlaceholder = document.getElementById(
     "project-details-placeholder"
   );
+  const taskDetailsPlaceholder = document.getElementById(
+    "task-details-placeholder"
+  );
 
   kanboardPlaceholder.setAttribute("style", "display: none");
   projectDetailsPlaceholder.setAttribute("style", "display: flex");
+  taskDetailsPlaceholder.setAttribute("style", "display: none");
 
   console.log("Project selected is: ", project);
 

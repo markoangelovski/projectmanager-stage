@@ -12,6 +12,7 @@ export default function writeTask({
   const li = document.createElement("li");
   li.setAttribute("id", `${taskId}`);
   li.setAttribute("class", "task-medium ui-sortable-handle");
+  li.setAttribute("draggable", "true");
 
   // Checkbox
   const checkbox = document.createElement("div");
@@ -30,7 +31,8 @@ export default function writeTask({
   title.setAttribute("class", "mt-0");
   const titleLink = document.createElement("a");
   titleLink.setAttribute("href", "javascript: void(0);");
-  titleLink.setAttribute("class", "text-dark");
+  titleLink.setAttribute("class", "text-dark task-title-link");
+  titleLink.setAttribute("data-anchor", `${taskId}`);
   titleLink.innerText = `${taskTitle}`;
   title.appendChild(titleLink);
 

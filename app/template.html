@@ -668,7 +668,102 @@
                             </div>
                             <!-- end col -->
                     </div>
-                    <!-- end row -->
+                    <!-- end project details -->
+
+                    <!-- start task details -->
+                    <div id="task-details-placeholder" style="display: none" class="row">
+                        <div class="col-12">
+                            <div class="card-box">
+                                <!-- Logo & title -->
+                                <div class="clearfix">
+                                    <div class="float-left">
+                                        <h4 id="task-title-display" class="m-0 d-print-none"></h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mt-3">
+                                            <p><b>Owner: <span id="task-owner-display"></span></b></p>
+                                            <p id="task-description-display" class="text-muted"></p>
+                                        </div>
+                                    </div>
+                                    <!-- end col -->
+                                    <div class="col-md-4 offset-md-2">
+                                        <div class="mt-3 float-right">
+                                            <p class="m-b-10"><strong>Created : </strong>&nbsp;&nbsp;&nbsp;&nbsp; <span id="task-date-create-display" class="float-right"></span></p>
+                                            <p class="m-b-10"><strong>Column : </strong> <span class="float-right"><span id="task-column-display" class=""></span></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- end col -->
+                                </div>
+                                <!-- end row -->
+                                <hr>
+                                <div class="form-group row mb-0">
+                                    <label class="col-sm-2 col-form-label">NAS Path:</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <input id="task-nas-display" type="text" class="form-control" placeholder="NAS Path" aria-label="NAS Path" aria-describedby="basic-addon2">
+                                            <div class="input-group-append">
+                                                <button id="task-nas-copy-display" class="btn btn-dark waves-effect waves-light" type="button">Copy</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <h4 class="header-title mt-3 mb-3">Links:</h4>
+                                <table class="table table-borderless table-hover table-centered m-0">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>URL</th>
+                                            <th>Go To</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Display task links here -->
+                                        <!-- <tr>
+                                            <td>
+                                                <h5 class="m-0 font-weight-normal">Development</h5>
+                                            </td>
+                                            <td id="project-dev-display"></td>
+                                            <td>
+                                                <a id="project-dev-link-display" href="javascript: void(0);" class="btn btn-xs btn-secondary" target="_blank"><i class="mdi mdi-arrow-top-right-bold-outline"></i></a>
+                                            </td>
+                                        </tr> -->
+                                    </tbody>
+                                </table>
+                                <hr>
+                                <h4 class="header-title mt-3 mb-3">Sub-Tasks:</h4>
+                                <div class="table-responsive">
+                                    <table class="table table-borderless table-hover table-centered m-0">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>Title</th>
+                                                <th>Created</th>
+                                                <th>Due Date</th>
+                                                <th>Remaining</th>
+                                                <th>Column</th>
+                                                <th>Go To</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="task-sub-task-list-display"></tbody>
+                                    </table>
+                                </div>
+                                <!-- end .table-responsive-->
+                                <div class="mt-4 mb-1">
+                                    <div class="text-right d-print-none">
+                                        <a id="task-delete-display" href="#" class="btn btn-danger waves-effect waves-light">Delete Task</a>
+                                    </div>
+                                </div>
+                                <!-- end .Delete Task placeholder-->
+                            </div>
+                            <!-- end card-box -->
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end task details -->
+
                 </div> <!-- container -->
 
             </div> <!-- content -->

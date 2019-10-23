@@ -1,6 +1,7 @@
 import { formatDistanceStrict, format } from "date-fns";
 import writeTask from "./writeTask";
 import clearTasksUI from "./clearTasksUI";
+import renderTaskDetails from "./renderTaskDetails";
 
 export default function renderTasks(tasks) {
   // Clear UI
@@ -54,6 +55,9 @@ export default function renderTasks(tasks) {
     upcoming.appendChild(filteredUpcoming);
     inprogress.appendChild(filteredInProgress);
     completed.appendChild(filteredCompleted);
+
+    // Set Render Task Details link function
+    renderTaskDetails();
   } else {
     // If local storage is empty, set values to 0
     document.getElementById("project-overview").innerHTML = 0;
