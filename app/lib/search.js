@@ -1,7 +1,17 @@
 import leftSidebar from "../components/left-sidebar/leftSidebar";
 import projectDisplay from "../components/projects/projects";
 
-const projects = JSON.parse(localStorage.getItem("projects"));
+let projects = JSON.parse(localStorage.getItem("projects"));
+
+// Reset Search functionality on fresh start
+document.querySelector(".fe-refresh-ccw").addEventListener("click", () => {
+  projects = JSON.parse(localStorage.getItem("projects"));
+  document
+    .querySelector(
+      "#wrapper > div.navbar-custom > ul.list-unstyled.topnav-menu.float-right.mb-0 > li:nth-child(2)"
+    )
+    .setAttribute("style", "display: none");
+});
 
 const search = document.getElementById("search");
 search.addEventListener("keyup", displaySearch);
@@ -62,3 +72,5 @@ function displaySearch(e) {
     projectDisplay(e);
   });
 }
+
+export { displaySearch };

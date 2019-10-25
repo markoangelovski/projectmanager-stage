@@ -6,6 +6,7 @@ import "../lib/deleteProject";
 import "./create-task/createTask";
 import "../lib/search";
 import "../lib/dragTaskColumns";
+import "../lib/initialDomRender";
 import getProjectDetails from "../lib/getProjectDetails";
 
 getProjectDetails();

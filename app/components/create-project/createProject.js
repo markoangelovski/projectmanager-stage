@@ -59,33 +59,15 @@ function displayProjectDetails(projectResponse) {
     "Project details are the following:";
 
   // Project details
-  title.parentElement.innerHTML = `<p class="col-form-label">${
-    projectResponse.project.title
-  }</p>`;
-  description.parentElement.innerHTML = `<p class="col-form-label">${
-    projectResponse.project.description
-  }</p>`;
-  owner.parentElement.innerHTML = `<p class="col-form-label">${
-    projectResponse.project.owner
-  }</p>`;
-  kanboard.parentElement.innerHTML = `<p class="col-form-label">${
-    projectResponse.project.kanboard
-  }</p>`;
-  dev.parentElement.innerHTML = `<p class="col-form-label">${
-    projectResponse.project.dev
-  }</p>`;
-  stage.parentElement.innerHTML = `<p class="col-form-label">${
-    projectResponse.project.stage
-  }</p>`;
-  prod.parentElement.innerHTML = `<p class="col-form-label">${
-    projectResponse.project.prod
-  }</p>`;
-  live.parentElement.innerHTML = `<p class="col-form-label">${
-    projectResponse.project.live
-  }</p>`;
-  nas.parentElement.innerHTML = `<p class="col-form-label">${
-    projectResponse.project.nas
-  }</p>`;
+  title.parentElement.innerHTML = `<p class="col-form-label">${projectResponse.project.title}</p>`;
+  description.parentElement.innerHTML = `<p class="col-form-label">${projectResponse.project.description}</p>`;
+  owner.parentElement.innerHTML = `<p class="col-form-label">${projectResponse.project.owner}</p>`;
+  kanboard.parentElement.innerHTML = `<p class="col-form-label">${projectResponse.project.kanboard}</p>`;
+  dev.parentElement.innerHTML = `<p class="col-form-label">${projectResponse.project.dev}</p>`;
+  stage.parentElement.innerHTML = `<p class="col-form-label">${projectResponse.project.stage}</p>`;
+  prod.parentElement.innerHTML = `<p class="col-form-label">${projectResponse.project.prod}</p>`;
+  live.parentElement.innerHTML = `<p class="col-form-label">${projectResponse.project.live}</p>`;
+  nas.parentElement.innerHTML = `<p class="col-form-label">${projectResponse.project.nas}</p>`;
 
   // Remove close and submit button
   const closeButton = document.querySelector(".modal-footer");
