@@ -1,6 +1,7 @@
 import kanboardTitle from "../components/kanboard-title/kanboardTitle";
 import leftSidebar from "../components/left-sidebar/leftSidebar";
 import renderTasks from "./renderTasks";
+import changeColumn from "./changeColumn";
 
 // This module renders the DOM elemens if there is no data in localstorage
 
@@ -28,5 +29,6 @@ if (localStorage.getItem("projects")) {
     kanboardTitlePlaceholder.appendChild(kanboardTitle(title));
     leftSidebar();
     renderTasks([]);
+    changeColumn();
   }, 2500);
 }

@@ -2,6 +2,7 @@ import { formatDistanceStrict, format } from "date-fns";
 import writeTask from "./writeTask";
 import clearTasksUI from "./clearTasksUI";
 import renderTaskDetails from "./renderTaskDetails";
+import changeColumn from "./changeColumn";
 
 export default function renderTasks(tasks) {
   // Clear UI
@@ -40,7 +41,8 @@ export default function renderTasks(tasks) {
           : "",
         taskDueDate: task.dueDate
           ? format(new Date(task.dueDate), "MMM do, yyyy")
-          : ""
+          : "",
+        taskColumn: task.column
       };
       if (task.column === "Upcoming") {
         filteredUpcoming.appendChild(writeTask(taskData));
@@ -55,6 +57,9 @@ export default function renderTasks(tasks) {
     upcoming.appendChild(filteredUpcoming);
     inprogress.appendChild(filteredInProgress);
     completed.appendChild(filteredCompleted);
+
+    // Add change column listeners
+    changeColumn();
 
     // Set Render Task Details link function
     renderTaskDetails();

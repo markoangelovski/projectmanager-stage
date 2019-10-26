@@ -6,7 +6,8 @@ export default function writeTask({
   taskDescription = "",
   projectTitle = "",
   taskDate = "",
-  taskDueDate = ""
+  taskDueDate = "",
+  taskColumn = ""
 }) {
   // Root task li element
   const li = document.createElement("li");
@@ -14,17 +15,46 @@ export default function writeTask({
   li.setAttribute("class", "task-medium ui-sortable-handle");
   li.setAttribute("draggable", "true");
 
-  // Checkbox
-  const checkbox = document.createElement("div");
-  checkbox.setAttribute(
-    "class",
-    "checkbox checkbox-blue mb-2 checkbox-single float-right"
-  );
-  const input = document.createElement("input");
-  input.setAttribute("type", "checkbox");
-  const label = document.createElement("label");
-  checkbox.appendChild(input);
-  checkbox.appendChild(label);
+  // Render proper "Move to column"
+  let columnsToRender1, columnsToRender2;
+  if (taskColumn === "Upcoming") columnsToRender1 = "In Progress";
+  if (taskColumn === "Upcoming") columnsToRender2 = "Completed";
+
+  if (taskColumn === "In Progress") columnsToRender1 = "Upcoming";
+  if (taskColumn === "In Progress") columnsToRender2 = "Completed";
+
+  if (taskColumn === "Completed") columnsToRender1 = "Upcoming";
+  if (taskColumn === "Completed") columnsToRender2 = "In Progress";
+
+  // Change column
+  const column = document.createElement("div");
+  column.setAttribute("class", "dropdown float-right");
+  const anchor = document.createElement("a");
+  anchor.setAttribute("href", "#");
+  anchor.setAttribute("class", "dropdown-toggle arrow-non");
+  anchor.setAttribute("data-toggle", "dropdown");
+  const i = document.createElement("i");
+  i.setAttribute("class", "mdi mdi-dots-vertical m-0 text-muted h3");
+  anchor.appendChild(i);
+  const menu = document.createElement("div");
+  menu.setAttribute("class", "column-select dropdown-menu dropdown-menu-right");
+  menu.setAttribute("x-placement", "bottom-end");
+  const moveTo = document.createElement("p");
+  moveTo.setAttribute("class", "dropdown-item");
+  moveTo.innerText = "Move to:";
+  const column1 = document.createElement("a");
+  column1.setAttribute("class", "dropdown-item");
+  column1.setAttribute("href", "#");
+  column1.innerText = columnsToRender1;
+  const column2 = document.createElement("a");
+  column2.setAttribute("class", "dropdown-item");
+  column2.setAttribute("href", "#");
+  column2.innerText = columnsToRender2;
+  menu.appendChild(moveTo);
+  menu.appendChild(column1);
+  menu.appendChild(column2);
+  column.appendChild(anchor);
+  column.appendChild(menu);
 
   // Title
   const title = document.createElement("h5");
@@ -98,7 +128,7 @@ export default function writeTask({
   row.appendChild(col);
 
   // Final construct
-  li.appendChild(checkbox);
+  li.appendChild(column);
   li.appendChild(title);
   li.appendChild(description);
   li.appendChild(projectTitlePlaceholder);
@@ -108,3 +138,17 @@ export default function writeTask({
 
   return li;
 }
+
+/*
+  /* <div class="dropdown float-right">
+  <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+    <i class="mdi mdi-dots-vertical m-0 text-muted h3"></i>
+  </a>
+  <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-136px, 26px, 0px);">
+    <p class="dropdown-item">Move to:</p>
+    <a class="dropdown-item" href="#">Column1</a>
+    <a class="dropdown-item" href="#">Column2</a>
+  </div>
+</div>
+
+*/
