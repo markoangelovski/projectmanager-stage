@@ -1,6 +1,7 @@
 const { api } = require(`./../../config/${process.env.API_CONFIG}`);
 import getProjectDetails from "./getProjectDetails";
 import renderTasks from "./renderTasks";
+import spinner from "./spinner";
 
 export default function changeColumn() {
   // Get all Column change menus, add click event listeners and call the API call for update
@@ -29,6 +30,9 @@ const changeColumnApiCall = async (id, column) => {
     }
   ];
 
+  // Insert spinner
+  spinner(true);
+
   const columnResponse = await fetch(`${api}/tasks/${id}`, {
     method: "PATCH",
     headers: {
@@ -41,9 +45,10 @@ const changeColumnApiCall = async (id, column) => {
 
   alert(columnResponse.message);
 
-  const projectLink = document.getElementById("project-details-link");
+  // Remove spinner
+  spinner(false);
 
-  projectLink.dataset.anchor ? console.log("tru") : console.log("fals");
+  const projectLink = document.getElementById("project-details-link");
 
   if (!projectLink.dataset.anchor) {
     renderTasks([]);

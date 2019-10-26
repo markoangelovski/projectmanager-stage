@@ -1,42 +1,31 @@
 const { api } = require(`../../../config/${process.env.API_CONFIG}`);
-import { format } from "date-fns";
-import getProjectDetails from "../../lib/getProjectDetails";
-import renderProjectDetails from "../../lib/renderProjectDetails";
-
-// Get placeholders
-const project = document.getElementById("project-details-link");
-const title = document.getElementById("task-title");
-const description = document.getElementById("task-description");
-const owner = document.getElementById("task-owner");
-const column = document.getElementById("task-column");
-const kanboard = document.getElementById("task-kanboard-url");
-const nas = document.getElementById("task-nas-path");
-const dueDate = document.querySelector("#task-due-date");
+import displayTaskDetails from "./displayTaskDetails";
 
 // Set Column value
 document.querySelectorAll(".new-task").forEach(button => {
   button.addEventListener("click", e => {
-    column.value = e.target.dataset.label;
+    document.getElementById("task-column").value = e.target.dataset.label;
   });
 });
 
+// Set listener for submitting the task data
 document
   .getElementById("full-width-modal-task")
   .addEventListener("submit", createTask);
 
-async function createTask(e) {
+export default async function createTask(e) {
   e.preventDefault();
 
   // Create task data payload
   const taskData = {
-    project: project.dataset.anchor,
-    title: title.value,
-    description: description.value,
-    owner: owner.value,
-    column: column.value,
-    kanboard: kanboard.value,
-    nas: nas.value,
-    dueDate: new Date(dueDate.value).getTime()
+    project: document.getElementById("project-details-link").dataset.anchor,
+    title: document.getElementById("task-title").value,
+    description: document.getElementById("task-description").value,
+    owner: document.getElementById("task-owner").value,
+    column: document.getElementById("task-column").value,
+    kanboard: document.getElementById("task-kanboard-url").value,
+    nas: document.getElementById("task-nas-path").value,
+    dueDate: new Date(document.querySelector("#task-due-date").value).getTime()
   };
 
   console.log(taskData);
@@ -55,63 +44,4 @@ async function createTask(e) {
   } catch (error) {
     console.warn(error);
   }
-}
-
-function displayTaskDetails(taskResponse) {
-  // Set the "Task creation successfull" title
-  const taskFormTitle = document.getElementById("full-width-modalLabel-task");
-  taskFormTitle.setAttribute("style", "color: limegreen;");
-  taskFormTitle.innerText = taskResponse.message;
-
-  // Set task description title
-  document.querySelector(
-    "#full-width-modal-task > div > div > div.modal-body > p"
-  ).innerText = "Task details are the following:";
-
-  // Task details
-  title.parentElement.innerHTML = `<p class="col-form-label">${taskResponse.task.title}</p>`;
-  description.parentElement.innerHTML = `<p class="col-form-label">${taskResponse.task.description}</p>`;
-  owner.parentElement.innerHTML = `<p class="col-form-label">${taskResponse.task.owner}</p>`;
-  column.parentElement.innerHTML = `<p class="col-form-label">${taskResponse.task.column}</p>`;
-  kanboard.parentElement.innerHTML = `<p class="col-form-label">${taskResponse.task.kanboard}</p>`;
-  nas.parentElement.innerHTML = `<p class="col-form-label">${taskResponse.task.nas}</p>`;
-  dueDate.parentElement.innerHTML = `<p class="col-form-label">${format(
-    new Date(taskResponse.task.dueDate),
-    "MMM do, yyyy"
-  )}</p>`;
-
-  // Remove close and submit button
-  const closeButton = document.querySelector(
-    "#full-width-modal-task > div > div > div.modal-footer"
-  );
-  closeButton.removeChild(closeButton.children[0]);
-  closeButton.removeChild(closeButton.children[0]);
-
-  // Set Continue button
-  const continueButton = document.getElementById("task-continue");
-  continueButton.setAttribute("style", "display: block");
-  continueButton.addEventListener("click", () => {
-    // Select Kanboard and Project Details placeholders and toggle them on/off
-    const kanboardPlaceholder = document.getElementById("kanboard-placeholder");
-    const taskDetailsPlaceholder = document.getElementById(
-      "task-details-placeholder"
-    );
-
-    kanboardPlaceholder.setAttribute("style", "display: flex");
-    taskDetailsPlaceholder.setAttribute("style", "display: none");
-
-    // Re-fetch updated project details
-    getProjectDetails();
-
-    // Get project details from local storage
-    const selectedProjectfromLocal = JSON.parse(
-      localStorage.getItem("projects")
-    );
-    const selectedProject = selectedProjectfromLocal.find(
-      selectProject => selectProject._id === project.dataset.anchor
-    );
-
-    // Re-render project detalis
-    renderProjectDetails(selectedProject);
-  });
 }
