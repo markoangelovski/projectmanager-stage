@@ -26,9 +26,9 @@ const taskLinkList = links => {
       "text-overflow: ellipsis;white-space: nowrap;max-width: 0;overflow: hidden;width: 40%"
     );
     const linkUrlLink = document.createElement("a");
+    linkUrlLink.setAttribute("href", link.link);
     linkUrlLink.setAttribute("id", "link-url");
     linkUrlLink.setAttribute("target", "_blank");
-    linkUrlLink.setAttribute("href", link.link);
     linkUrlLink.innerText = link.link;
     linkUrlPlace.appendChild(linkUrlLink);
 

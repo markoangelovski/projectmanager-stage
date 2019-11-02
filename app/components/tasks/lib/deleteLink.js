@@ -19,6 +19,7 @@ const deleteLink = async (taskId, linkId) => {
 
       // Set notificaton
       alertSuccess(deleted.message);
+      spinner(false);
     } else {
       alertError(deleted.message);
       spinner(false);
@@ -38,7 +39,5 @@ const deleteLink = async (taskId, linkId) => {
   const linkList = document.getElementById("task-link-list-display");
   while (linkList.firstChild) linkList.removeChild(linkList.firstChild);
   linkList.appendChild(taskLinkList(updatedTask.links));
-
-  spinner(false);
 };
 export { deleteLink };
