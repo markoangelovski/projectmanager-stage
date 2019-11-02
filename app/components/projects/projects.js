@@ -1,6 +1,6 @@
 import kanboardTitle from "../kanboard-title/kanboardTitle";
 import renderProjectDetails from "../../lib/renderProjectDetails";
-import renderTasks from "../../lib/renderTasks";
+import renderTasks from "../tasks/renderTasksKanboard";
 import router from "../../router/router";
 
 // Get placeholders

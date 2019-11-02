@@ -7,6 +7,8 @@ import "./create-task/createTask";
 import "../lib/search";
 import "../lib/initialDomRender";
 import "../lib/changeColumn";
+import "./tasks/lib/submitLink";
+import "./tasks/lib/getLinkId";
 import getProjectDetails from "../lib/getProjectDetails";
 
 getProjectDetails();

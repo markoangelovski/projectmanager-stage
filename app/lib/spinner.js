@@ -4,7 +4,7 @@ export default function spinner(spin) {
   const frame = document.createElement("div");
   frame.setAttribute(
     "style",
-    "background-color: #3bafda;opacity: 0.2;width: 100vw;height: 100vh;position: absolute;z-index: 1;"
+    "background-color: #3bafda;opacity: 0.2;width: 100vw;height: 300vh;position: absolute;z-index: 1;"
   );
   const spinner = document.createElement("div");
   spinner.setAttribute("class", "spinner-border text-primary m-2");
@@ -16,7 +16,7 @@ export default function spinner(spin) {
   frameHolder.appendChild(frame);
   frameHolder.appendChild(spinner);
 
-  const anchor = document.getElementById("kanboard-placeholder");
+  const anchor = document.querySelector(".content-page");
 
   // Render or remove spinner to/from DOM
   if (spin) {

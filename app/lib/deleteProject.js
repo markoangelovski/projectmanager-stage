@@ -1,5 +1,6 @@
 const { api } = require(`../../config/${process.env.API_CONFIG}`);
 import getProjectDetails from "../lib/getProjectDetails";
+import { alertError } from "./alerts";
 
 // Get observeables and initiate Project ID variable
 const projectLink = document.getElementById("project-details-link");
@@ -31,10 +32,11 @@ async function deleteProject(id) {
     await getProjectDetails();
 
     if (deletedProject) {
-      alert(deletedProject.message);
+      alertError(deletedProject.message);
       window.location.reload();
     }
   } catch (error) {
     console.warn(error);
+    alertError(error);
   }
 }

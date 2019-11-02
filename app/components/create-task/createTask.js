@@ -1,5 +1,6 @@
 const { api } = require(`../../../config/${process.env.API_CONFIG}`);
 import displayTaskDetails from "./displayTaskDetails";
+import { alertError } from "../../lib/alerts";
 
 // Set Column value
 document.querySelectorAll(".new-task").forEach(button => {
@@ -43,5 +44,6 @@ export default async function createTask(e) {
     displayTaskDetails(taskResponse);
   } catch (error) {
     console.warn(error);
+    alertError(error);
   }
 }

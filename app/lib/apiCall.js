@@ -1,4 +1,5 @@
 const { api } = require(`./../../config/${process.env.API_CONFIG}`);
+import { alertError } from "../lib/alerts";
 
 export async function apiCall(url) {
   try {
@@ -6,5 +7,6 @@ export async function apiCall(url) {
     return data;
   } catch (error) {
     console.warn(error);
+    alertError(error);
   }
 }

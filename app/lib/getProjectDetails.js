@@ -1,4 +1,5 @@
 import { apiCall } from "../lib/apiCall";
+import { alertError } from "../lib/alerts";
 
 // Load projects and tasks from API into local storage
 export default async function getProjectDetails() {
@@ -12,5 +13,6 @@ export default async function getProjectDetails() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   } catch (error) {
     console.warn(error);
+    alertError(error);
   }
 }

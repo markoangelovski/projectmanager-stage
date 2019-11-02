@@ -1,5 +1,6 @@
 const { api } = require(`../../../config/${process.env.API_CONFIG}`);
 import getProjectDetails from "../../lib/getProjectDetails";
+import { alertError } from "../../lib/alerts";
 
 const title = document.getElementById("project-title");
 const description = document.getElementById("project-description");
@@ -45,6 +46,7 @@ async function createProject(e) {
     displayProjectDetails(projectResponse);
   } catch (error) {
     console.warn(error);
+    alertError(error);
   }
 }
 

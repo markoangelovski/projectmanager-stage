@@ -1,6 +1,6 @@
 import kanboardTitle from "../components/kanboard-title/kanboardTitle";
 import leftSidebar from "../components/left-sidebar/leftSidebar";
-import renderTasks from "./renderTasks";
+import renderTasks from "../components/tasks/renderTasksKanboard";
 import changeColumn from "./changeColumn";
 
 // This module renders the DOM elemens if there is no data in localstorage
@@ -14,7 +14,7 @@ const selector = document.querySelector(
 if (localStorage.getItem("projects")) {
   selector.setAttribute("style", "display: none");
 } else {
-  // If there is no data, wait for 2.5sec and get the data again
+  // If there is no data, wait for 2.5sec and get the data from local storage again
   selector.setAttribute("style", "display: list-item");
   setTimeout(() => {
     const kanboardTitlePlaceholder = document.querySelector("h4.page-title");

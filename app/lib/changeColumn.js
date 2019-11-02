@@ -1,6 +1,6 @@
 const { api } = require(`./../../config/${process.env.API_CONFIG}`);
 import getProjectDetails from "./getProjectDetails";
-import renderTasks from "./renderTasks";
+import renderTasks from "../components/tasks/renderTasksKanboard";
 import spinner from "./spinner";
 
 export default function changeColumn() {
@@ -43,13 +43,11 @@ const changeColumnApiCall = async (id, column) => {
 
   await getProjectDetails();
 
-  alert(columnResponse.message);
-
   // Remove spinner
   spinner(false);
 
+  // Check if a project is selected and render tasks accordingly
   const projectLink = document.getElementById("project-details-link");
-
   if (!projectLink.dataset.anchor) {
     renderTasks([]);
   } else {

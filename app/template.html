@@ -703,6 +703,7 @@
                                 </div>
                                 <!-- end row -->
                                 <hr>
+                                <!-- NAS section start -->
                                 <div class="form-group row mb-0">
                                     <label class="col-sm-2 col-form-label">NAS Path:</label>
                                     <div class="col-sm-10">
@@ -714,29 +715,37 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- NAS section start -->
                                 <hr>
+                                <!-- Links section start -->
                                 <h4 class="header-title mt-3 mb-3">Links:</h4>
                                 <table class="table table-borderless table-hover table-centered m-0">
                                     <thead class="thead-light">
                                         <tr>
                                             <th>Title</th>
                                             <th>URL</th>
-                                            <th>Go To</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <!-- Display task links here -->
-                                        <!-- <tr>
-                                            <td>
-                                                <h5 class="m-0 font-weight-normal">Development</h5>
-                                            </td>
-                                            <td id="project-dev-display"></td>
-                                            <td>
-                                                <a id="project-dev-link-display" href="javascript: void(0);" class="btn btn-xs btn-secondary" target="_blank"><i class="mdi mdi-arrow-top-right-bold-outline"></i></a>
-                                            </td>
-                                        </tr> -->
+                                    <tbody id="task-link-list-display">
+                                        
                                     </tbody>
                                 </table>
+                                <hr>
+                                <div class="form-group row mb-0">
+                                    <div class="col-md-6">
+                                        <input id="task-link-title-submit" type="text" class=" form-control" placeholder="Enter new Link Title">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <input id="task-link-url-submit" type="text" class="form-control" placeholder="Enter new Link URL" aria-label="NAS Path" aria-describedby="basic-addon2">
+                                            <div class="input-group-append">
+                                                <button id="task-link-submit" class="btn btn-dark waves-effect waves-light" type="button">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Links section end -->
                                 <hr>
                                 <h4 class="header-title mt-3 mb-3">Sub-Tasks:</h4>
                                 <div class="table-responsive">
