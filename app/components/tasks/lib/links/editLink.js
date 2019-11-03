@@ -1,8 +1,8 @@
-import { editLinkCall } from "../../../drivers/link.driver";
-import getProjectDetails from "../../../lib/getProjectDetails";
-import taskLinkList from "../ui/taskLinkList";
-import { alertSuccess, alertError } from "../../../lib/alerts";
-import spinner from "../../../lib/spinner";
+import { editLinkCall } from "../../../../drivers/link.driver";
+import getProjectDetails from "../../../../lib/getProjectDetails";
+import taskLinkList from "../../ui/taskLinkList";
+import { alertSuccess, alertError } from "../../../../lib/alerts";
+import spinner from "../../../../lib/spinner";
 
 const editLink = (linkId, element) => {
   // Get link title

@@ -1,8 +1,8 @@
-import getProjectDetails from "../../../lib/getProjectDetails";
-import { submitLinkCall } from "../../../drivers/link.driver";
-import taskLinkList from "../ui/taskLinkList";
-import spinner from "../../../lib/spinner";
-import { alertSuccess, alertError } from "../../../lib/alerts";
+import getProjectDetails from "../../../../lib/getProjectDetails";
+import { submitLinkCall } from "../../../../drivers/link.driver";
+import taskLinkList from "../../ui/taskLinkList";
+import spinner from "../../../../lib/spinner";
+import { alertSuccess, alertError } from "../../../../lib/alerts";
 
 // Get submit Link button
 document

@@ -3,7 +3,8 @@ import kanboardTitle from "../kanboard-title/kanboardTitle";
 import leftSidebar from "../left-sidebar/leftSidebar";
 import taskSubTaskList from "./ui/taskSubTaskList";
 import taskLinkList from "./ui/taskLinkList";
-import { render } from "../../render/render";
+import taskNotesList from "./ui/taskNotesList";
+import render from "../../render/render";
 
 // Get placeholders
 const kanboardTitlePlaceholder = document.querySelector("h4.page-title");
@@ -99,6 +100,11 @@ function displayTaskDetails(id) {
   const linkList = document.getElementById("task-link-list-display");
   while (linkList.firstChild) linkList.removeChild(linkList.firstChild);
   linkList.appendChild(taskLinkList(task.links));
+
+  // Render notes list to DOM
+  const notesList = document.getElementById("task-notes-list-display");
+  while (notesList.firstChild) notesList.removeChild(notesList.firstChild);
+  notesList.innerHTML = taskNotesList(task.notes);
 
   // Render sub tasklist to DOM
   const subTaskList = document.getElementById("task-sub-task-list-display");

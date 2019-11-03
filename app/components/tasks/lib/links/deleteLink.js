@@ -1,8 +1,8 @@
-import getProjectDetails from "../../../lib/getProjectDetails";
-import { deleteLinkCall } from "../../../drivers/link.driver";
-import taskLinkList from "../ui/taskLinkList";
-import { alertSuccess, alertError } from "../../../lib/alerts";
-import spinner from "../../../lib/spinner";
+import getProjectDetails from "../../../../lib/getProjectDetails";
+import { deleteLinkCall } from "../../../../drivers/link.driver";
+import taskLinkList from "../../ui/taskLinkList";
+import { alertSuccess, alertError } from "../../../../lib/alerts";
+import spinner from "../../../../lib/spinner";
 
 const deleteLink = async (taskId, linkId) => {
   console.log("delete", linkId);

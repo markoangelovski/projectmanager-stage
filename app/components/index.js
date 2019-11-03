@@ -7,9 +7,11 @@ import "./create-task/createTask";
 import "../lib/search";
 import "../lib/initialDomRender";
 import "../lib/changeColumn";
-import "./tasks/lib/submitLink";
-import "./tasks/lib/getLinkId";
-import "./tasks/lib/deleteTask";
+import "../components/tasks/lib/links/submitLink";
+import "../components/tasks/lib/links/getLinkId";
+import "../components/tasks/lib/notes/submitNote";
+import "../components/tasks/lib/notes/getNoteId";
+import "../components/tasks/lib/deleteTask";
 import getProjectDetails from "../lib/getProjectDetails";
 
 getProjectDetails();
