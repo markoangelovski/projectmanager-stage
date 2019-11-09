@@ -22,6 +22,6 @@ const getLinkId = () => {
   });
 };
 
-getLinkId();
+//getLinkId();
 
 export { getLinkId };

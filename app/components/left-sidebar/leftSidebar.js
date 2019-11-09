@@ -32,5 +32,3 @@ export default function leftSidebar(id) {
     selectedProjectRoot.parentElement.setAttribute("style", "display:none;");
   }
 }
-
-leftSidebar();

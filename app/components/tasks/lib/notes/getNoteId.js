@@ -22,6 +22,6 @@ const getNoteId = () => {
   });
 };
 
-getNoteId();
+//getNoteId();
 
 export { getNoteId };

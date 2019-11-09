@@ -2,26 +2,28 @@ const { api } = require(`../../config/${process.env.API_CONFIG}`);
 import getProjectDetails from "../lib/getProjectDetails";
 import { alertError } from "./alerts";
 
-// Get observeables and initiate Project ID variable
-const projectLink = document.getElementById("project-details-link");
-let id;
+const deleteProjectTrigger = () => {
+  // Get observeables and initiate Project ID variable
+  const projectLink = document.getElementById("project-details-link");
+  let id;
 
-const mutationObserver = new MutationObserver(mutations => {
-  mutations.forEach(mutation => {
-    id = mutation.target.dataset.anchor;
+  const mutationObserver = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      id = mutation.target.dataset.anchor;
+    });
   });
-});
-mutationObserver.observe(projectLink, {
-  attributes: true
-});
+  mutationObserver.observe(projectLink, {
+    attributes: true
+  });
 
-// Delete project
-document
-  .getElementById("project-delete-display")
-  .addEventListener("click", () => {
-    if (confirm("Are you sure you want to delete this project?"))
-      deleteProject(id);
-  });
+  // Delete project
+  document
+    .getElementById("project-delete-display")
+    .addEventListener("click", () => {
+      if (confirm("Are you sure you want to delete this project?"))
+        deleteProject(id);
+    });
+};
 
 async function deleteProject(id) {
   try {

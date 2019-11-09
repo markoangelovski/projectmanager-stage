@@ -5,22 +5,52 @@ const webpack = require("webpack");
 
 module.exports = {
   entry: {
+    // login: "./app/components/login/login.js",
     projectmanager: "./app/index.js"
   },
-  mode: "development",
   output: {
-    filename: "[name].js",
+    filename: "[name]-chunk-[chunkHash].js",
+    chunkFilename: "[name]-chunk-[chunkHash].js",
     path: path.resolve(__dirname, "dist")
+    //publicPath: "/project-manager/"
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendor",
+          chunks: "initial"
+        }
+      }
+    },
+    runtimeChunk: {
+      name: "manifest"
+    }
+  },
+  mode: "development",
+  devtool: "inline-source-map",
   devServer: {
     open: true
+    // public: "localhost:8080/project-manager",
+    // publicPath: "/project-manager/"
+    //contentBase: "./dist/"
   },
   plugins: [
     new webpack.DefinePlugin({
       "process.env.API_CONFIG": JSON.stringify("dev")
     }),
     new HtmlWebpackPlugin({
-      template: "./app/template.html"
+      template: "./app/template.html",
+      inject: true,
+      chunks: ["projectmanager", "vendor", "manifest" /* , "login" */],
+      filename: "index.html"
+    }),
+    new HtmlWebpackPlugin({
+      template: "./app/login.html",
+      inject: true,
+      chunks: ["/* projectmanager", "vendor", "manifest */"],
+      filename: "login.html"
     }),
     new HtmlWebpackTagsPlugin({
       tags: [
@@ -33,6 +63,7 @@ module.exports = {
         "./assets/js/app.min.js"
       ],
       append: true
+      //usePublicPath: true
     })
   ],
   module: {

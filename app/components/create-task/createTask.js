@@ -2,18 +2,19 @@ const { api } = require(`../../../config/${process.env.API_CONFIG}`);
 import displayTaskDetails from "./displayTaskDetails";
 import { alertError } from "../../lib/alerts";
 
-// Set Column value
-document.querySelectorAll(".new-task").forEach(button => {
-  button.addEventListener("click", e => {
-    document.getElementById("task-column").value = e.target.dataset.label;
+const createTaskTrigger = () => {
+  // Set Column value
+  document.querySelectorAll(".new-task").forEach(button => {
+    button.addEventListener("click", e => {
+      document.getElementById("task-column").value = e.target.dataset.label;
+    });
   });
-});
 
-// Set listener for submitting the task data
-document
-  .getElementById("full-width-modal-task")
-  .addEventListener("submit", createTask);
-
+  // Set listener for submitting the task data
+  document
+    .getElementById("full-width-modal-task")
+    .addEventListener("submit", createTask);
+};
 export default async function createTask(e) {
   e.preventDefault();
 

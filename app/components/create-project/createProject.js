@@ -12,9 +12,11 @@ const prod = document.getElementById("prod-url");
 const live = document.getElementById("live-url");
 const nas = document.getElementById("nas-path");
 
-document
-  .getElementById("full-width-modal")
-  .addEventListener("submit", createProject);
+const createProjetTrigget = () => {
+  document
+    .getElementById("full-width-modal")
+    .addEventListener("submit", createProject);
+};
 
 async function createProject(e) {
   e.preventDefault();

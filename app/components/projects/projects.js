@@ -3,36 +3,38 @@ import renderProjectDetails from "../../lib/renderProjectDetails";
 import renderTasks from "../tasks/renderTasksKanboard";
 import router from "../../router/router";
 
-// Get placeholders
-const kanboardTitlePlaceholder = document.querySelector("h4.page-title");
-const breadcrumb = document.querySelector(".breadcrumb-item.active");
-const kanboardPlaceholder = document.getElementById("kanboard-placeholder");
-const projectDetailsPlaceholder = document.getElementById(
-  "project-details-placeholder"
-);
-const taskDetailsPlaceholder = document.getElementById(
-  "task-details-placeholder"
-);
+const getPlaceholders = () => {
+  // Get placeholders
+  const kanboardTitlePlaceholder = document.querySelector("h4.page-title");
+  const breadcrumb = document.querySelector(".breadcrumb-item.active");
+  const kanboardPlaceholder = document.getElementById("kanboard-placeholder");
+  const projectDetailsPlaceholder = document.getElementById(
+    "project-details-placeholder"
+  );
+  const taskDetailsPlaceholder = document.getElementById(
+    "task-details-placeholder"
+  );
 
-// Set Kanboard title
-const projectCount = localStorage.getItem("projectCount");
-const taskCount = localStorage.getItem("taskCount");
-kanboardTitlePlaceholder.appendChild(
-  kanboardTitle({
-    title: "Overview",
-    projectCount,
-    taskCount
-  })
-);
+  // Set Kanboard title
+  const projectCount = localStorage.getItem("projectCount");
+  const taskCount = localStorage.getItem("taskCount");
+  kanboardTitlePlaceholder.appendChild(
+    kanboardTitle({
+      title: "Overview",
+      projectCount,
+      taskCount
+    })
+  );
 
-// Set Breadcrumb
-breadcrumb.innerHTML = "Overview";
+  // Set Breadcrumb
+  breadcrumb.innerHTML = "Overview";
 
-// Render all tasks to Overview UI
-renderTasks([]);
+  // Render all tasks to Overview UI
+  renderTasks([]);
 
-// Get elements from Left Menu
-document.getElementById("overview").addEventListener("click", projectDisplay);
+  // Get elements from Left Menu
+  document.getElementById("overview").addEventListener("click", projectDisplay);
+};
 
 // Render tasks of the selected Project
 export default function projectDisplay(e) {

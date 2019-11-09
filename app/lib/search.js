@@ -3,27 +3,33 @@ import projectDisplay from "../components/projects/projects";
 
 let projects = JSON.parse(localStorage.getItem("projects"));
 
-// Reset Search functionality on fresh start
-document.querySelector(".fe-refresh-ccw").addEventListener("click", () => {
-  projects = JSON.parse(localStorage.getItem("projects"));
-  document
-    .querySelector(
-      "#wrapper > div.navbar-custom > ul.list-unstyled.topnav-menu.float-right.mb-0 > li:nth-child(2)"
-    )
-    .setAttribute("style", "display: none");
-});
-
-const search = document.getElementById("search");
-search.addEventListener("keyup", displaySearch);
-document.querySelector(".app-search").addEventListener("submit", displaySearch);
-
-// Flter through projects and match Title and Description with a term
-function searchProjects(term, projects) {
-  return projects.filter(project => {
-    const regex = new RegExp(term, "gi");
-    return project.title.match(regex) || project.description.match(regex);
+const freshStartSearchTrigger = () => {
+  // Reset Search functionality on fresh start
+  document.querySelector(".fe-refresh-ccw").addEventListener("click", () => {
+    projects = JSON.parse(localStorage.getItem("projects"));
+    document
+      .querySelector(
+        "#wrapper > div.navbar-custom > ul.list-unstyled.topnav-menu.float-right.mb-0 > li:nth-child(2)"
+      )
+      .setAttribute("style", "display: none");
   });
-}
+};
+
+const searchFunction = () => {
+  const search = document.getElementById("search");
+  search.addEventListener("keyup", displaySearch);
+  document
+    .querySelector(".app-search")
+    .addEventListener("submit", displaySearch);
+
+  // Flter through projects and match Title and Description with a term
+  function searchProjects(term, projects) {
+    return projects.filter(project => {
+      const regex = new RegExp(term, "gi");
+      return project.title.match(regex) || project.description.match(regex);
+    });
+  }
+};
 
 // Display searched Project
 function displaySearch(e) {

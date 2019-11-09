@@ -9,15 +9,28 @@ const webpack = require("webpack");
 
 module.exports = {
   entry: {
-    "assets/test": "./app/index"
+    projectmanager: "./app/index"
   },
   mode: "production",
   output: {
-    filename: "assets/app-[contentHash].js",
+    filename: "assets/[name]-chunk-[contentHash].js",
+    chunkFilename: "assets/[name]-chunk-[chunkHash].js",
     path: path.resolve(__dirname, "../dist")
   },
   optimization: {
-    minimizer: [new OptimizeCssAssetsPlugin(), new TerserPlugin()]
+    minimizer: [new OptimizeCssAssetsPlugin(), new TerserPlugin()],
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendor",
+          chunks: "initial"
+        }
+      }
+    },
+    runtimeChunk: {
+      name: "manifest"
+    }
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -26,6 +39,8 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: "./app/template.html",
+      inject: true,
+      chunks: ["projectmanager", "vendor", "manifest"],
       filename: "index.html",
       minify: {
         removeAttributeQuotes: true,

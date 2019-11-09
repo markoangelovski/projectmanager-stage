@@ -6,9 +6,13 @@ import { alertSuccess, alertError } from "../../../lib/alerts";
 import spinner from "../../../lib/spinner";
 
 // Set delete task event listener
-document.getElementById("task-delete-display").addEventListener("click", () => {
-  if (confirm("Are you sure you want to delete this task?")) deleteTask();
-});
+const deleteTaskTrigger = () => {
+  document
+    .getElementById("task-delete-display")
+    .addEventListener("click", () => {
+      if (confirm("Are you sure you want to delete this task?")) deleteTask();
+    });
+};
 
 const deleteTask = async () => {
   // Get Project and Task IDs
