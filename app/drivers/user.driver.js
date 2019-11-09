@@ -1,12 +1,12 @@
-const { api } = require(`../../config/${process.env.API_CONFIG}`);
+const {
+  pmBackend: { api, apiversion }
+} = require(`../../config/${process.env.API_CONFIG}`);
 
-const checkAuthCall = token => {
+const checkAuthCall = () => {
   return new Promise((resolve, reject) => {
-    fetch(`${api}/auth`, {
+    fetch(`${api}/${apiversion}/auth`, {
       method: "POST",
-      headers: {
-        Authorization: token
-      },
+      // Credentials: include for sending the cookie from the browser to the backend
       credentials: "include"
     })
       .then(res => res.json())
@@ -17,11 +17,12 @@ const checkAuthCall = token => {
 
 const logInCall = payload => {
   return new Promise((resolve, reject) => {
-    fetch(`${api}/auth/login`, {
+    fetch(`${api}/${apiversion}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
+      // Credentials: include for setting the cookie in browser
       credentials: "include",
       body: JSON.stringify(payload)
     })

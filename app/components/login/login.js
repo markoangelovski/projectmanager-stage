@@ -33,15 +33,12 @@ const logIn = async e => {
       submit.innerHTML = " Log In ";
       submit.removeAttribute("disabled");
     } else {
-      console.log("login", login);
-      // Set token to local storage
-      localStorage.token = `Bearer ${login.token}`;
       localStorage.user = JSON.stringify(login.user);
       // If user is logged in render project manager body
       const {
         projectManagerBody
       } = require("../project-manager-body/projectManagerBody");
-      body.removeChild(body.firstChild);
+      while (body.firstChild) body.removeChild(body.firstChild);
       body.insertAdjacentHTML("afterbegin", projectManagerBody);
     }
   } catch (error) {

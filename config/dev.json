@@ -1,3 +1,6 @@
 {
-  "api": "http://localhost:3000"
+  "pmBackend": {
+    "api": "http://localhost:3000",
+    "apiversion": "v1"
+  }
 }

@@ -46,12 +46,6 @@ module.exports = {
       chunks: ["projectmanager", "vendor", "manifest" /* , "login" */],
       filename: "index.html"
     }),
-    new HtmlWebpackPlugin({
-      template: "./app/login.html",
-      inject: true,
-      chunks: ["/* projectmanager", "vendor", "manifest */"],
-      filename: "login.html"
-    }),
     new HtmlWebpackTagsPlugin({
       tags: [
         "./assets/css/bootstrap.min.css",
