@@ -1,6 +1,6 @@
 const {
   pmBackend: { api, apiversion }
-} = require(`../../config/${process.env.API_CONFIG}`);
+} = require(`../../../config/${process.env.API_CONFIG}`);
 
 const checkAuthCall = () => {
   return new Promise((resolve, reject) => {

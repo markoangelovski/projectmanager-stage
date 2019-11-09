@@ -43,7 +43,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./app/template.html",
       inject: true,
-      chunks: ["projectmanager", "vendor", "manifest" /* , "login" */],
+      chunks: ["projectmanager", "vendor", "manifest"],
       filename: "index.html"
     }),
     new HtmlWebpackTagsPlugin({

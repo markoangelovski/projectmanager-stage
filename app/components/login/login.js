@@ -1,4 +1,5 @@
-import { logInCall } from "../../drivers/user.driver";
+import { logInCall } from "../../drivers/User/user.driver";
+import { renderProjectManager } from "../../index";
 
 const logIn = async e => {
   e.preventDefault();
@@ -34,12 +35,9 @@ const logIn = async e => {
       submit.removeAttribute("disabled");
     } else {
       localStorage.user = JSON.stringify(login.user);
-      // If user is logged in render project manager body
-      const {
-        projectManagerBody
-      } = require("../project-manager-body/projectManagerBody");
       while (body.firstChild) body.removeChild(body.firstChild);
-      body.insertAdjacentHTML("afterbegin", projectManagerBody);
+      // If user is logged in render project manager body
+      renderProjectManager();
     }
   } catch (error) {
     console.warn(error);

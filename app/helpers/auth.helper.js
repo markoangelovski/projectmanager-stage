@@ -1,4 +1,4 @@
-import { checkAuthCall } from "../drivers/user.driver";
+import { checkAuthCall } from "../drivers/User/user.driver";
 
 const checkAuth = async () => {
   // Authenticate user

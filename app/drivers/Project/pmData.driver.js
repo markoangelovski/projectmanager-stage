@@ -1,11 +1,16 @@
-import { apiCall } from "../lib/apiCall";
-import { alertError } from "../lib/alerts";
+import apiCall from "../../helpers/api.helper";
+import { alertError } from "../../lib/alerts";
 
 // Load projects and tasks from API into local storage
 export default async function getProjectDetails() {
   try {
-    const { projectCount, projects } = await apiCall("projects");
-    const { taskCount, tasks } = await apiCall("tasks");
+    const [projectDetails, taskDetails] = await Promise.all([
+      apiCall("projects"),
+      apiCall("tasks")
+    ]);
+
+    const { projectCount, projects } = projectDetails;
+    const { taskCount, tasks } = taskDetails;
 
     localStorage.setItem("projectCount", projectCount);
     localStorage.setItem("projects", JSON.stringify(projects));
@@ -16,3 +21,5 @@ export default async function getProjectDetails() {
     alertError(error);
   }
 }
+
+getProjectDetails();

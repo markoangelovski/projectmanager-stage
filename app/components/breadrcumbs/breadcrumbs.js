@@ -1,4 +1,4 @@
-const breadcrumbs = () => {
+(() => {
   // Get breadcrumbs placeholder
   const breadcrumbPlaceholder = document.getElementById(
     "breadcrumb-placeholder"
@@ -39,6 +39,4 @@ const breadcrumbs = () => {
   li.setAttribute("class", "breadcrumb-item active");
 
   breadcrumbPlaceholder.appendChild(li);
-};
-
-export default breadcrumbs;
+})();
