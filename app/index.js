@@ -28,7 +28,6 @@ const body = document.getElementsByTagName("body")[0];
     const { loginForm } = require("./components/login/loginForm");
     // If api is not available, render login form with warning and disable log in button
     body.insertAdjacentHTML("afterbegin", loginForm);
-    document.getElementById("login-form").addEventListener("submit", logIn);
     const warning = document.querySelector(".invalid-feedback");
     warning.innerHTML =
       "Application is not available at the moment. Try again later.";
@@ -41,7 +40,7 @@ export const renderProjectManager = () => {
   const {
     projectManagerBody
   } = require("./components/project-manager-body/projectManagerBody");
-  body.innerHTML = projectManagerBody;
+  body.insertAdjacentHTML("afterbegin", projectManagerBody);
   // Dynamic import for the rest of the app functionality
   import(/* webpackChunkName: "app"*/ "./components/app");
 };

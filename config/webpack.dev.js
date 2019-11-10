@@ -5,7 +5,7 @@ const webpack = require("webpack");
 
 module.exports = {
   entry: {
-    // login: "./app/components/login/login.js",
+    // kanbanvendor: "./assets/js/vendor.min.js",
     projectmanager: "./app/index.js"
   },
   output: {
@@ -43,18 +43,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./app/template.html",
       inject: true,
-      chunks: ["projectmanager", "vendor", "manifest"],
+      chunks: ["projectmanager", "vendor", "manifest" /* , "kanbanvendor" */],
       filename: "index.html"
     }),
     new HtmlWebpackTagsPlugin({
       tags: [
         "./assets/css/bootstrap.min.css",
         "./assets/css/icons.min.css",
-        "./assets/css/app.min.css",
-        "./assets/js/vendor.min.js",
-        "./assets/libs/jquery-ui.min.js",
-        "./assets/js/kanban.init.js",
-        "./assets/js/app.min.js"
+        "./assets/css/app.min.css"
       ],
       append: true
       //usePublicPath: true

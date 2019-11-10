@@ -35,7 +35,7 @@ const logIn = async e => {
       submit.removeAttribute("disabled");
     } else {
       localStorage.user = JSON.stringify(login.user);
-      while (body.firstChild) body.removeChild(body.firstChild);
+      body.querySelector(".account-pages.mt-5.mb-5").remove();
       // If user is logged in render project manager body
       renderProjectManager();
     }

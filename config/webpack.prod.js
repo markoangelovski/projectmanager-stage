@@ -53,19 +53,12 @@ module.exports = {
         copy: [
           { from: "assets/css", to: "/css" },
           { from: "assets/fonts", to: "/fonts" },
-          { from: "assets/js", to: "/js" },
-          { from: "assets/libs", to: "/libs" }
+          { from: "assets/js", to: "/js" }
         ],
         links: [
           { path: "css/bootstrap.min.css" },
           { path: "css/icons.min.css" },
           { path: "css/app.min.css" }
-        ],
-        scripts: [
-          { path: "js/vendor.min.js" },
-          { path: "libs/jquery-ui.min.js" },
-          { path: "js/kanban.init.js" },
-          { path: "js/app.min.js" }
         ]
       }
     }),
