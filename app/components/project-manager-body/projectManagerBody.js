@@ -271,7 +271,7 @@ export const projectManagerBody = `
                                     <span id="project-title-placeholder"></span>
                                     <span class="menu-arrow"></span>
                                 </a>
-                                <ul class="nav-third-level nav mm-collapse" aria-expanded="false" style="height: 0px;">
+                                <ul id="project-menu-dropdown" class="nav-third-level nav mm-collapse" aria-expanded="false" style="height: 0px;">
                                     <li>
                                         <a id="" href="javascript: void(0);">Kanboard</a>
                                     </li>

@@ -1,7 +1,7 @@
-const { api } = require(`./../../config/${process.env.API_CONFIG}`);
-import getProjectDetails from "./getProjectDetails";
-import renderTasks from "../components/tasks/renderTasksKanboard";
-import spinner from "./spinner";
+const { api } = require(`./../../../../config/${process.env.API_CONFIG}`);
+import { getProjectDetails } from "../../../drivers/Project/project.driver";
+import renderTasks from "../renderTasksKanboard";
+import spinner from "../../../lib/spinner";
 
 export default function changeColumn() {
   // Get all Column change menus, add click event listeners and call the API call for update

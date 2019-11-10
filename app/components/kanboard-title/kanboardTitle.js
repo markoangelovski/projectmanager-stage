@@ -35,7 +35,7 @@ export default function kanboardTitle({
   h4.appendChild(tasks);
   h4.appendChild(taskCounter);
 
-  return h4;
+  titlePlaceholder.appendChild(h4);
 }
 
 /* <h4 class="page-title">Overview - Projects: <span id="project-overview">2</span> - Tasks: <span id="task-overview">5</span></h4> */

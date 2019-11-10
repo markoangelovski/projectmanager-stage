@@ -1,47 +1,30 @@
+import { getProject } from "../helpers/localStorage.helper";
 import leftSidebar from "../components/left-sidebar/leftSidebar";
-import projectDisplay from "../components/projects/projects";
+import displayProject from "../components/projects/lib/displayProject";
 
-let projects = JSON.parse(localStorage.getItem("projects"));
+const search = document.getElementById("search");
+search.addEventListener("keyup", displaySearch);
+document.querySelector(".app-search").addEventListener("submit", displaySearch);
 
-const freshStartSearchTrigger = () => {
-  // Reset Search functionality on fresh start
-  document.querySelector(".fe-refresh-ccw").addEventListener("click", () => {
-    projects = JSON.parse(localStorage.getItem("projects"));
-    document
-      .querySelector(
-        "#wrapper > div.navbar-custom > ul.list-unstyled.topnav-menu.float-right.mb-0 > li:nth-child(2)"
-      )
-      .setAttribute("style", "display: none");
+// Flter through projects and match Title and Description with a term
+function searchProjects(term) {
+  return getProject().filter(project => {
+    const regex = new RegExp(term, "gi");
+    return project.title.match(regex) || project.description.match(regex);
   });
-};
-
-const searchFunction = () => {
-  const search = document.getElementById("search");
-  search.addEventListener("keyup", displaySearch);
-  document
-    .querySelector(".app-search")
-    .addEventListener("submit", displaySearch);
-
-  // Flter through projects and match Title and Description with a term
-  function searchProjects(term, projects) {
-    return projects.filter(project => {
-      const regex = new RegExp(term, "gi");
-      return project.title.match(regex) || project.description.match(regex);
-    });
-  }
-};
+}
 
 // Display searched Project
 function displaySearch(e) {
   e.preventDefault();
-  const results = searchProjects(search.value, projects);
+  const results = searchProjects(search.value);
   console.log("this ", results);
   const searchResultsPlaceholder = document.createDocumentFragment();
 
   // Create outout
   results.forEach(result => {
     const anchor = document.createElement("a");
-    anchor.setAttribute("id", result._id);
+    anchor.setAttribute("data-anchor", result._id);
     anchor.setAttribute("href", "javascript:void(0);");
     anchor.classList = "dropdown-item";
     const icon = document.createElement("i");
@@ -66,17 +49,12 @@ function displaySearch(e) {
   );
 
   // Load selected Project
-  searchResults.addEventListener("click", e => {
-    let id;
-    if (e.target.id) {
-      id = e.target.id;
-    } else if (!e.target.id) {
-      id = e.target.parentNode.id;
-    }
+  searchResults.addEventListener("click", function handler(e) {
     searchResults.classList.remove("show");
-    leftSidebar(id);
-    projectDisplay(e);
+    leftSidebar(e.target.dataset.anchor);
+    displayProject(e);
+
+    // Remove event listeners
+    this.removeEventListener("click", handler);
   });
 }
-
-export { displaySearch };

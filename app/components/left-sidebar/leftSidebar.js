@@ -1,3 +1,5 @@
+import { getProject } from "../../helpers/localStorage.helper";
+
 export default function leftSidebar(id) {
   // Display the number of projects in UI
   const projectCount = localStorage.getItem("projectCount");
@@ -20,13 +22,11 @@ export default function leftSidebar(id) {
   );
 
   if (id) {
-    // Display the projects in Left Sidebar
-    const projects = JSON.parse(localStorage.getItem("projects"));
+    // Display the selected project in Left Sidebar
     selectedProjectRoot.parentElement.setAttribute("style", "display:block;");
 
-    const selectedProject = projects.find(project => project._id === id);
-    selectedProjectPlaceholder.innerText = selectedProject.title;
-    projectKanboard.id = id;
+    selectedProjectPlaceholder.innerText = getProject(id).title;
+    projectKanboard.dataset.anchor = id;
     projectDetails.dataset.anchor = id;
   } else {
     selectedProjectRoot.parentElement.setAttribute("style", "display:none;");

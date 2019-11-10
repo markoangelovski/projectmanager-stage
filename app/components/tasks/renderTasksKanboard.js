@@ -2,7 +2,7 @@ import { formatDistanceStrict, format } from "date-fns";
 import writeTask from "../../lib/writeTask";
 import clearTasksUI from "../../lib/clearTasksUI";
 import renderTaskDetails from "./renderTaskDetails";
-import changeColumn from "../../lib/changeColumn";
+import changeColumn from "./lib/changeColumn";
 
 export default function renderTasks(tasks) {
   // Clear UI

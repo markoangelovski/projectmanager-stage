@@ -1,8 +1,8 @@
-import apiCall from "../../helpers/api.helper";
+import { apiCall } from "../../helpers/api.helper";
 import { alertError } from "../../lib/alerts";
 
 // Load projects and tasks from API into local storage
-export default async function getProjectDetails() {
+export async function getProjectDetails() {
   try {
     const [projectDetails, taskDetails] = await Promise.all([
       apiCall("projects"),
@@ -21,5 +21,3 @@ export default async function getProjectDetails() {
     alertError(error);
   }
 }
-
-getProjectDetails();
