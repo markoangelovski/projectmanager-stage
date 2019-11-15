@@ -4,10 +4,8 @@ import leftSidebar from "../left-sidebar/leftSidebar";
 import taskSubTaskList from "./ui/taskSubTaskList";
 import taskLinkList from "./ui/taskLinkList";
 import taskNotesList from "./ui/taskNotesList";
-import render from "../../render/render";
-
-// Get placeholders
-const kanboardTitlePlaceholder = document.querySelector("h4.page-title");
+import deleteTask from "./lib/deleteTask";
+import { getTask, getProject } from "../../helpers/localStorage.helper";
 
 export default function renderTaskDetails() {
   // Get titles of all tasks and init click event listener
@@ -20,25 +18,17 @@ export default function renderTaskDetails() {
     );
 }
 
-function displayTaskDetails(id) {
-  // Get clicked task from local storage
-  const task = JSON.parse(localStorage.getItem("tasks")).find(
-    task => task._id == id
+function displayTaskDetails(taskId) {
+  const task = getTask(taskId);
+  const project = getProject(
+    task.project._id ? task.project._id : task.project
   );
-
-  // Get clicked task's project from local storage
-  const project = JSON.parse(localStorage.getItem("projects")).find(
-    project => project._id == task.project._id
-  );
-  console.log("I've been summoned for: ", task);
 
   // Set Kanboard Title
-  kanboardTitlePlaceholder.appendChild(
-    kanboardTitle({
-      title: task.project.title,
-      taskCount: project.tasks.length
-    })
-  );
+  kanboardTitle({
+    title: project.title,
+    taskCount: project.tasks.length
+  });
 
   // Set left siedbar
   leftSidebar(project._id);
@@ -55,7 +45,7 @@ function displayTaskDetails(id) {
   // Set Task Title
   const taskTitle = document.getElementById("task-title-display");
   taskTitle.innerText = task.title;
-  taskTitle.dataset.anchor = id;
+  taskTitle.dataset.anchor = taskId;
 
   // Set Task Owner
   document.getElementById("task-owner-display").innerText = task.owner

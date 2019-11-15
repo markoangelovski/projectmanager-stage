@@ -1,5 +1,6 @@
 import kanboardTitle from "../../kanboard-title/kanboardTitle";
 import renderTasks from "../../tasks/renderTasksKanboard";
+import createTaskTrigger from "../../tasks/lib/createTask";
 import renderProjectDetails from "../ui/renderProjectDetails";
 import { getProject } from "../../../helpers/localStorage.helper";
 
@@ -45,6 +46,7 @@ export default function displayProject(e) {
     // Render all tasks to Overview UI
     renderTasks([]);
   } else if (
+    // If Kanboard in left menu or dropdown-item in search results is clicked
     e.target.innerText === "Kanboard" ||
     e.target.className === "dropdown-item"
   ) {
@@ -57,9 +59,13 @@ export default function displayProject(e) {
         button.classList.remove("d-none");
     });
 
+    // Intiate New Task function
+    createTaskTrigger();
+
     // Reset Kanboard visibility
     kanboardPlaceholder.setAttribute("style", "display: flex");
     projectDetailsPlaceholder.setAttribute("style", "display: none");
+    taskDetailsPlaceholder.setAttribute("style", "display: none");
 
     // Select project from local storage
     const { title, tasks } = getProject(e.target.dataset.anchor);

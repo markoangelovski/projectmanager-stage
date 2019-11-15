@@ -1,18 +1,16 @@
-import { deleteTaskCall } from "./../../../drivers/task.driver";
-import getProjectDetails from "../../../lib/getProjectDetails";
+import { deleteTaskCall } from "../../../drivers/Task/task.driver";
+import { getProject, removeTask } from "../../../helpers/localStorage.helper";
 import kanboardTitle from "../../kanboard-title/kanboardTitle";
-import renderTasksKanboard from "../renderTasksKanboard";
+import renderTasks from "../renderTasksKanboard";
 import { alertSuccess, alertError } from "../../../lib/alerts";
 import spinner from "../../../lib/spinner";
 
 // Set delete task event listener
-const deleteTaskTrigger = () => {
-  document
-    .getElementById("task-delete-display")
-    .addEventListener("click", () => {
-      if (confirm("Are you sure you want to delete this task?")) deleteTask();
-    });
-};
+document
+  .getElementById("task-delete-display")
+  .addEventListener("click", function handler() {
+    if (confirm("Are you sure you want to delete this task?")) deleteTask();
+  });
 
 const deleteTask = async () => {
   // Get Project and Task IDs
@@ -25,13 +23,11 @@ const deleteTask = async () => {
   try {
     const deletedTask = await deleteTaskCall(taskId);
     if (!deletedTask.error) {
-      // Re-fetch data
-      await getProjectDetails();
-
       // Set notificaton
       alertSuccess(deletedTask.message);
       spinner(false);
     } else {
+      console.warn(deletedTask.message);
       alertError(deletedTask.message);
       spinner(false);
     }
@@ -41,10 +37,11 @@ const deleteTask = async () => {
     spinner(false);
   }
 
+  // Update local storage
+  removeTask(taskId, projectId);
+
   // Re-render project details
-  const updatedProject = JSON.parse(localStorage.getItem("projects")).find(
-    updatedProject => updatedProject._id === projectId
-  );
+  const updatedProject = getProject(projectId);
 
   // Re-render Project details to DOM
   // Select Kanboard, Project and Task Details placeholders and toggle them on
@@ -61,16 +58,15 @@ const deleteTask = async () => {
   taskDetailsPlaceholder.setAttribute("style", "display: none");
 
   // Re-render project title
-  const kanboardTitlePlaceholder = document.querySelector("h4.page-title");
-  const projectCount = localStorage.getItem("projectCount") || 0;
   const taskCount = localStorage.getItem("taskCount") || 0;
   const title = {
     title: updatedProject.title,
-    projectCount,
     taskCount
   };
-  kanboardTitlePlaceholder.appendChild(kanboardTitle(title));
+  kanboardTitle(title);
 
   // Re-render project tasks
-  renderTasksKanboard(updatedProject.tasks);
+  renderTasks(updatedProject.tasks);
 };
+
+export default deleteTask;

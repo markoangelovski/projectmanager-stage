@@ -1,7 +1,9 @@
-const { api } = require(`./../../../../config/${process.env.API_CONFIG}`);
+import { updateTaskCall } from "../../../drivers/Task/task.driver";
 import { getProjectDetails } from "../../../drivers/Project/project.driver";
 import renderTasks from "../renderTasksKanboard";
+import { getProject } from "../../../helpers/localStorage.helper";
 import spinner from "../../../lib/spinner";
+import { alertSuccess, alertError } from "../../../lib/alerts";
 
 export default function changeColumn() {
   // Get all Column change menus, add click event listeners and call the API call for update
@@ -9,12 +11,14 @@ export default function changeColumn() {
     column.children[1].addEventListener("click", () =>
       changeColumnApiCall(
         column.parentElement.parentElement.id,
+        "column",
         column.children[1].innerText
       )
     );
     column.children[2].addEventListener("click", () =>
       changeColumnApiCall(
         column.parentElement.parentElement.id,
+        "column",
         column.children[2].innerText
       )
     );
@@ -22,41 +26,38 @@ export default function changeColumn() {
 }
 
 // Send API call
-const changeColumnApiCall = async (id, column) => {
-  const payload = [
-    {
-      propName: "column",
-      value: column
-    }
-  ];
-
+const changeColumnApiCall = async (taskId, attributeKey, attributeValue) => {
   // Insert spinner
   spinner(true);
 
-  const columnResponse = await fetch(`${api}/tasks/${id}`, {
-    method: "PATCH",
-    headers: {
-      "Content-type": "application/json"
-    },
-    body: JSON.stringify(payload)
-  }).then(res => res.json());
+  try {
+    const updatedTask = await updateTaskCall(
+      taskId,
+      attributeKey,
+      attributeValue
+    );
 
-  await getProjectDetails();
-
-  // Remove spinner
-  spinner(false);
-
+    if (!updatedTask.error) {
+      await getProjectDetails();
+      alertSuccess(updatedTask.message);
+    } else {
+      console.warn(updatedTask.message);
+      alertError(updatedTask.message);
+    }
+    // Remove spinner
+    spinner(false);
+  } catch (error) {
+    console.warn(updatedTask.message);
+    alertError(updatedTask.message);
+    // Remove spinner
+    spinner(false);
+  }
   // Check if a project is selected and render tasks accordingly
   const projectLink = document.getElementById("project-details-link");
   if (!projectLink.dataset.anchor) {
     renderTasks([]);
   } else {
-    const projects = JSON.parse(localStorage.getItem("projects"));
-    const project = projects.find(
-      project => project._id === projectLink.dataset.anchor
-    );
+    const project = getProject(projectLink.dataset.anchor);
     renderTasks(project.tasks);
   }
 };
-
-changeColumn();

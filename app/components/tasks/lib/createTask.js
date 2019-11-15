@@ -1,6 +1,7 @@
-const { api } = require(`../../../config/${process.env.API_CONFIG}`);
+import { setTask } from "../../../helpers/localStorage.helper";
+import { createTaskCall } from "../../../drivers/Task/task.driver";
 import displayTaskDetails from "./displayTaskDetails";
-import { alertError } from "../../lib/alerts";
+import { alertSuccess, alertError } from "../../../lib/alerts";
 
 const createTaskTrigger = () => {
   // Set Column value
@@ -15,11 +16,11 @@ const createTaskTrigger = () => {
     .getElementById("full-width-modal-task")
     .addEventListener("submit", createTask);
 };
-export default async function createTask(e) {
+async function createTask(e) {
   e.preventDefault();
 
   // Create task data payload
-  const taskData = {
+  const payload = {
     project: document.getElementById("project-details-link").dataset.anchor,
     title: document.getElementById("task-title").value,
     description: document.getElementById("task-description").value,
@@ -30,21 +31,27 @@ export default async function createTask(e) {
     dueDate: new Date(document.querySelector("#task-due-date").value).getTime()
   };
 
-  console.log(taskData);
+  console.log(payload);
 
   // Send the data payload to API
   try {
-    const taskResponse = await fetch(`${api}/tasks`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(taskData)
-    }).then(res => res.json());
+    const taskResponse = await createTaskCall(payload);
 
-    displayTaskDetails(taskResponse);
+    if (!taskResponse.error) {
+      alertSuccess(taskResponse.message);
+      displayTaskDetails(taskResponse);
+
+      // Save new task to local storage
+      setTask(taskResponse.task, payload.project);
+    } else {
+      // In case of errors display error message
+      console.warn(taskResponse.message);
+      alertError(taskResponse.message);
+    }
   } catch (error) {
     console.warn(error);
     alertError(error);
   }
 }
+
+export default createTaskTrigger;

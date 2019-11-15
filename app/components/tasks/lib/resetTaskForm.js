@@ -1,6 +1,7 @@
-import getProjectDetails from "../../lib/getProjectDetails";
-import renderProjectDetails from "../../lib/renderProjectDetails";
-import kanboardTitle from "../kanboard-title/kanboardTitle";
+import renderProjectDetails from "../../projects/ui/renderProjectDetails";
+import kanboardTitle from "../../kanboard-title/kanboardTitle";
+import renderTasks from "../renderTasksKanboard";
+import { getProject } from "../../../helpers/localStorage.helper";
 
 export default async function resetTaskForm() {
   const taskFormTitle = document.getElementById("full-width-modalLabel-task");
@@ -14,30 +15,23 @@ export default async function resetTaskForm() {
   kanboardPlaceholder.setAttribute("style", "display: flex");
   taskDetailsPlaceholder.setAttribute("style", "display: none");
 
-  // Re-fetch updated project details
-  await getProjectDetails();
-
   // Get project details from local storage
-  const selectedProjectfromLocal = JSON.parse(localStorage.getItem("projects"));
-  const selectedProject = selectedProjectfromLocal.find(
-    selectProject =>
-      selectProject._id ===
-      document.getElementById("project-details-link").dataset.anchor
+  const selectedProject = getProject(
+    document.getElementById("project-details-link").dataset.anchor
   );
 
   // Re-render project title
-  const kanboardTitlePlaceholder = document.querySelector("h4.page-title");
   const projectCount = localStorage.getItem("projectCount") || 0;
   const taskCount = localStorage.getItem("taskCount") || 0;
   const title = {
     title: selectedProject.title,
-    projectCount,
     taskCount
   };
-  kanboardTitlePlaceholder.appendChild(kanboardTitle(title));
+  kanboardTitle(title);
 
   // Re-render project detalis
-  renderProjectDetails(selectedProject);
+  // renderProjectDetails(selectedProject);
+  renderTasks(selectedProject.tasks);
 
   // Reset Create Task form
   // Modal title
