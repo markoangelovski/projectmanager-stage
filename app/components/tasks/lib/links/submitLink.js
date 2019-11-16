@@ -1,5 +1,8 @@
-import getProjectDetails from "../../../../lib/getProjectDetails";
-import { submitLinkCall } from "../../../../drivers/link.driver";
+import { submitLinkCall } from "../../../../drivers/Task/link.driver";
+import {
+  getTask,
+  setUpdatedTask
+} from "../../../../helpers/localStorage.helper";
 import taskLinkList from "../../ui/taskLinkList";
 import spinner from "../../../../lib/spinner";
 import { alertSuccess, alertError } from "../../../../lib/alerts";
@@ -27,31 +30,27 @@ const submitLinkTrigger = () => {
 
         // Check for any returned server errors
         if (!submitted.error) {
-          // Re-fetch data
-          await getProjectDetails();
-
           // Set notificaton
           alertSuccess(submitted.message);
+          // Set link to local storage
+          setUpdatedTask(submitted.task, submitted.task.project);
         } else {
-          alertError(submitted.message);
+          console.warn(submitted.message);
           spinner(false);
+          alertError(submitted.message);
         }
       } catch (error) {
         console.warn(error);
         spinner(false);
         alertError(error);
       }
-
-      // Re-render task details
-      const updatedTask = JSON.parse(localStorage.getItem("tasks")).find(
-        upatedTask => upatedTask._id === task
-      );
-
       // Re-render linklist to DOM
       const linkList = document.getElementById("task-link-list-display");
       while (linkList.firstChild) linkList.removeChild(linkList.firstChild);
-      linkList.appendChild(taskLinkList(updatedTask.links));
+      linkList.appendChild(taskLinkList(getTask(task).links));
 
       spinner(false);
     });
 };
+
+export { submitLinkTrigger };

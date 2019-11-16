@@ -1,18 +1,21 @@
-import { editLinkCall } from "../../../../drivers/link.driver";
-import getProjectDetails from "../../../../lib/getProjectDetails";
+import { editLinkCall } from "../../../../drivers/Task/link.driver";
 import taskLinkList from "../../ui/taskLinkList";
+import {
+  getTask,
+  setUpdatedTask
+} from "../../../../helpers/localStorage.helper";
 import { alertSuccess, alertError } from "../../../../lib/alerts";
 import spinner from "../../../../lib/spinner";
 
 const editLink = (linkId, element) => {
   // Get link title
-  const linkTitle = element.querySelector("#link-title");
+  const linkTitle = element.querySelector(".link-title");
   linkTitle.setAttribute("contenteditable", true);
   linkTitle.focus();
   const linkTitleInitialValue = linkTitle.innerText;
 
   // Get link url
-  const linkUrl = element.querySelector("#link-url");
+  const linkUrl = element.querySelector(".link-url");
   linkUrl.setAttribute("contenteditable", true);
   const linkUrlInitialValue = linkUrl.innerText;
 
@@ -49,14 +52,17 @@ const saveLink = async (e, linkTitle, linkUrl, linkId) => {
   ]);
   const payloadEncoded = encodeURIComponent(payload);
 
+  let taskId;
+
   try {
     // Submit link for edit
     const edited = await editLinkCall(linkId, payloadEncoded);
 
     // Check for any returned server errors
     if (!edited.error) {
-      // Re-fetch data
-      await getProjectDetails();
+      // Update local storage
+      setUpdatedTask(edited.task, edited.task.project);
+      taskId = edited.task._id;
 
       // Set notificaton
       alertSuccess(edited.message);
@@ -70,23 +76,14 @@ const saveLink = async (e, linkTitle, linkUrl, linkId) => {
     spinner(false);
   }
 
-  console.log("I was clicked! - save", payloadEncoded);
   // Reset input fields
   linkTitle.setAttribute("contenteditable", false);
   linkUrl.setAttribute("contenteditable", false);
 
-  // Get current task
-  const taskId = document.getElementById("task-title-display").dataset.anchor;
-
-  // Re-render task details
-  const updatedTask = JSON.parse(localStorage.getItem("tasks")).find(
-    upatedTask => upatedTask._id === taskId
-  );
-
   // Re-render linklist to DOM
   const linkList = document.getElementById("task-link-list-display");
   while (linkList.firstChild) linkList.removeChild(linkList.firstChild);
-  linkList.appendChild(taskLinkList(updatedTask.links));
+  linkList.appendChild(taskLinkList(getTask(taskId).links));
 
   spinner(false);
 };
@@ -106,30 +103,3 @@ const cancelSaveLink = (
 };
 
 export { editLink };
-
-// 1 Makni sve ovo gore
-// 2 Napravi da su tamo link naziv i url editabilni na klik na edit u dropdownu
-// 3 Dinamički popuni payload i enkodiraj ga
-// 4 Zovi editLink u trycatch sa errowarning msg
-// 5 Re-render linkove nazad
-
-// const payload = [
-//   {
-//     propName: "name1",
-//     value: "value1"
-//   },
-//   {
-//     propName: "name2",
-//     value: "value2"
-//   }
-// ];
-
-// // const payload = payload
-// const stringified = JSON.stringify(payload);
-// const encodedStringified = encodeURIComponent(stringified);
-
-// editLink("5db47ce20cb5ca35d893a211", encodedStringified)
-//   .then(res => console.log("res", res))
-//   .catch(err => {
-//     console.warn(err);
-//   });

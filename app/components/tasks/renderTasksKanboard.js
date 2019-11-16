@@ -5,7 +5,6 @@ import renderTaskDetails from "./renderTaskDetails";
 import changeColumn from "./lib/changeColumn";
 
 export default function renderTasks(tasks) {
-  console.log("tasks frm render tasks :", tasks);
   // Clear UI
   clearTasksUI();
 

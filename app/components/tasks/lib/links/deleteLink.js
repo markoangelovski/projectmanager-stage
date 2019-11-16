@@ -1,6 +1,10 @@
-import getProjectDetails from "../../../../lib/getProjectDetails";
-import { deleteLinkCall } from "../../../../drivers/link.driver";
+// import getProjectDetails from "../../../../lib/getProjectDetails";
+import { deleteLinkCall } from "../../../../drivers/Task/link.driver";
 import taskLinkList from "../../ui/taskLinkList";
+import {
+  getTask,
+  setUpdatedTask
+} from "../../../../helpers/localStorage.helper";
 import { alertSuccess, alertError } from "../../../../lib/alerts";
 import spinner from "../../../../lib/spinner";
 
@@ -11,11 +15,11 @@ const deleteLink = async (taskId, linkId) => {
   try {
     // Submit link for deletion
     const deleted = await deleteLinkCall(taskId, linkId);
-
+    console.log("deleted.task :", deleted.task);
     // Check for any returned server errors
     if (!deleted.error) {
-      // Re-fetch data
-      await getProjectDetails();
+      // Remove link from local storage
+      setUpdatedTask(deleted.task, deleted.task.project);
 
       // Set notificaton
       alertSuccess(deleted.message);
@@ -30,14 +34,9 @@ const deleteLink = async (taskId, linkId) => {
     spinner(false);
   }
 
-  // Re-render task details
-  const updatedTask = JSON.parse(localStorage.getItem("tasks")).find(
-    upatedTask => upatedTask._id === taskId
-  );
-
   // Re-render linklist to DOM
   const linkList = document.getElementById("task-link-list-display");
   while (linkList.firstChild) linkList.removeChild(linkList.firstChild);
-  linkList.appendChild(taskLinkList(updatedTask.links));
+  linkList.appendChild(taskLinkList(getTask(taskId).links));
 };
 export { deleteLink };

@@ -6,7 +6,8 @@ const getLinkId = () => {
   const links = document.getElementById("task-link-list-display");
   // Listen to events on Link list table
   links.addEventListener("click", e => {
-    e.preventDefault();
+    e.target.className !== "link-url" ? e.preventDefault() : null;
+
     // Get label and linkId
     const label = e.target.innerText;
     const taskId = e.target.dataset.task;
@@ -21,7 +22,5 @@ const getLinkId = () => {
     }
   });
 };
-
-//getLinkId();
 
 export { getLinkId };

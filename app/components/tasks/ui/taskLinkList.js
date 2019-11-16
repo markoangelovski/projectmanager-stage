@@ -4,6 +4,7 @@ const taskLinkList = links => {
   // Set Link list placeholder
   const linkPlaceholder = document.createDocumentFragment();
   links.forEach(link => {
+    // console.log("link :", link);
     // Create Table row for each Link
     const placeholder = document.createElement("tr");
 
@@ -14,8 +15,7 @@ const taskLinkList = links => {
       "text-overflow: ellipsis;max-width: 0;overflow: hidden;width: 50%"
     );
     const linkTitle = document.createElement("h5");
-    linkTitle.setAttribute("id", "link-title");
-    linkTitle.classList = "m-0 font-weight-normal";
+    linkTitle.classList = "m-0 font-weight-normal link-title";
     linkTitle.innerText = link.title;
     linkTitlePlace.appendChild(linkTitle);
 
@@ -27,7 +27,7 @@ const taskLinkList = links => {
     );
     const linkUrlLink = document.createElement("a");
     linkUrlLink.setAttribute("href", link.link);
-    linkUrlLink.setAttribute("id", "link-url");
+    linkUrlLink.setAttribute("class", "link-url");
     linkUrlLink.setAttribute("target", "_blank");
     linkUrlLink.innerText = link.link;
     linkUrlPlace.appendChild(linkUrlLink);

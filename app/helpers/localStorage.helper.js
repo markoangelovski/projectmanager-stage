@@ -61,4 +61,20 @@ const removeTask = (taskId, projectId) => {
   return "Task removed.";
 };
 
-export { getProject, setProject, getTask, setTask, removeTask };
+const setUpdatedTask = (task, projectId) => {
+  const tasks = getTask();
+  const filteredTasks = tasks.filter(oldTask => oldTask._id !== task._id);
+  localStorage.tasks = JSON.stringify([...filteredTasks, task]);
+  const updatedProject = getProject(projectId);
+  updatedProject.tasks = updatedProject.tasks.filter(
+    oldTask => oldTask._id !== task._id
+  );
+  updatedProject.tasks = [...updatedProject.tasks, task];
+  const filteredProjects = getProject().filter(
+    project => project._id !== projectId
+  );
+  localStorage.projects = JSON.stringify([...filteredProjects, updatedProject]);
+  return "Task set";
+};
+
+export { getProject, setProject, getTask, setTask, removeTask, setUpdatedTask };

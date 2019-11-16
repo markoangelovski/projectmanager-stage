@@ -1,8 +1,10 @@
-const { api } = require(`../../config/${process.env.API_CONFIG}`);
+const {
+  pmBackend: { api, apiversion }
+} = require(`../../../config/${process.env.API_CONFIG}`);
 
 const submitLinkCall = (task, payload) => {
   return new Promise((resolve, reject) => {
-    fetch(`${api}/links/${task}`, {
+    fetch(`${api}/${apiversion}/links/${task}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -17,7 +19,7 @@ const submitLinkCall = (task, payload) => {
 
 const editLinkCall = (linkId, payload) => {
   return new Promise((resolve, reject) => {
-    fetch(`${api}/links/${linkId}/?link=${payload}`, {
+    fetch(`${api}/${apiversion}/links/${linkId}/?link=${payload}`, {
       method: "PATCH"
     })
       .then(res => res.json())
@@ -28,7 +30,7 @@ const editLinkCall = (linkId, payload) => {
 
 const deleteLinkCall = (taskId, linkId) => {
   return new Promise((resolve, reject) => {
-    fetch(`${api}/links/${taskId}?linkId=${linkId}`, {
+    fetch(`${api}/${apiversion}/links/${taskId}?linkId=${linkId}`, {
       method: "DELETE"
     })
       .then(res => res.json())

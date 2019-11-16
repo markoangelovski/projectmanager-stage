@@ -4,7 +4,9 @@ import leftSidebar from "../left-sidebar/leftSidebar";
 import taskSubTaskList from "./ui/taskSubTaskList";
 import taskLinkList from "./ui/taskLinkList";
 import taskNotesList from "./ui/taskNotesList";
-import deleteTask from "./lib/deleteTask";
+import { submitLinkTrigger } from "./lib/links/submitLink";
+import { getLinkId } from "./lib/links/getLinkId";
+import deleteTaskTrigger from "./lib/deleteTask";
 import { getTask, getProject } from "../../helpers/localStorage.helper";
 
 export default function renderTaskDetails() {
@@ -102,3 +104,12 @@ function displayTaskDetails(taskId) {
     subTaskList.removeChild(subTaskList.firstChild);
   subTaskList.appendChild(taskSubTaskList(task.subtasks));
 }
+
+// Initialize submit link trigger
+submitLinkTrigger();
+
+// Initialize edit link trigger
+getLinkId();
+
+// Initiaize delete task trigger
+deleteTaskTrigger();
