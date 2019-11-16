@@ -1,6 +1,9 @@
-import { editNoteCall } from "../../../../drivers/note.driver";
-import getProjectDetails from "../../../../lib/getProjectDetails";
+import { editNoteCall } from "../../../../drivers/Task/note.driver";
 import taskNotesList from "../../ui/taskNotesList";
+import {
+  getTask,
+  setUpdatedTask
+} from "../../../../helpers/localStorage.helper";
 import { alertSuccess, alertError } from "../../../../lib/alerts";
 import spinner from "../../../../lib/spinner";
 
@@ -31,14 +34,17 @@ const saveNote = async (e, noteText, noteId) => {
   );
   const payloadEncoded = encodeURIComponent(payload);
 
+  let taskId;
+
   try {
     // Submit note for edit
     const edited = await editNoteCall(noteId, payloadEncoded);
 
     // Check for any returned server errors
     if (!edited.error) {
-      // Re-fetch data
-      await getProjectDetails();
+      // Update task in local storage
+      setUpdatedTask(edited.task, edited.task.project);
+      taskId = edited.task._id;
 
       // Set notificaton
       alertSuccess(edited.message);
@@ -52,22 +58,13 @@ const saveNote = async (e, noteText, noteId) => {
     spinner(false);
   }
 
-  console.log("I was clicked! - save", payloadEncoded);
   // Reset input fields
   noteText.setAttribute("contenteditable", false);
-
-  // Get current task
-  const taskId = document.getElementById("task-title-display").dataset.anchor;
-
-  // Re-render task details
-  const updatedTask = JSON.parse(localStorage.getItem("tasks")).find(
-    upatedTask => upatedTask._id === taskId
-  );
 
   // Render notes list to DOM
   const notesList = document.getElementById("task-notes-list-display");
   while (notesList.firstChild) notesList.removeChild(notesList.firstChild);
-  notesList.innerHTML = taskNotesList(updatedTask.notes);
+  notesList.innerHTML = taskNotesList(getTask(taskId).notes);
 
   spinner(false);
 };

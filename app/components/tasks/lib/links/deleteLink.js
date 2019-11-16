@@ -1,4 +1,3 @@
-// import getProjectDetails from "../../../../lib/getProjectDetails";
 import { deleteLinkCall } from "../../../../drivers/Task/link.driver";
 import taskLinkList from "../../ui/taskLinkList";
 import {
@@ -9,7 +8,6 @@ import { alertSuccess, alertError } from "../../../../lib/alerts";
 import spinner from "../../../../lib/spinner";
 
 const deleteLink = async (taskId, linkId) => {
-  console.log("delete", linkId);
   spinner(true);
   // Delete link api call
   try {

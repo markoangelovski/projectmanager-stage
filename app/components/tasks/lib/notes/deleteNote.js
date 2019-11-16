@@ -1,11 +1,13 @@
-import getProjectDetails from "../../../../lib/getProjectDetails";
-import { deleteNoteCall } from "../../../../drivers/note.driver";
+import { deleteNoteCall } from "../../../../drivers/Task/note.driver";
 import taskNotesList from "../../ui/taskNotesList";
+import {
+  getTask,
+  setUpdatedTask
+} from "../../../../helpers/localStorage.helper";
 import { alertSuccess, alertError } from "../../../../lib/alerts";
 import spinner from "../../../../lib/spinner";
 
 const deleteNote = async (taskId, noteId) => {
-  console.log("delete", noteId);
   spinner(true);
   // Delete note api call
   try {
@@ -14,8 +16,8 @@ const deleteNote = async (taskId, noteId) => {
 
     // Check for any returned server errors
     if (!deleted.error) {
-      // Re-fetch data
-      await getProjectDetails();
+      // Remove note from local storage
+      setUpdatedTask(deleted.task, deleted.task.project);
 
       // Set notificaton
       alertSuccess(deleted.message);
@@ -30,14 +32,9 @@ const deleteNote = async (taskId, noteId) => {
     spinner(false);
   }
 
-  // Re-render task details
-  const updatedTask = JSON.parse(localStorage.getItem("tasks")).find(
-    upatedTask => upatedTask._id === taskId
-  );
-
   // Render notes list to DOM
   const notesList = document.getElementById("task-notes-list-display");
   while (notesList.firstChild) notesList.removeChild(notesList.firstChild);
-  notesList.innerHTML = taskNotesList(updatedTask.notes);
+  notesList.innerHTML = taskNotesList(getTask(taskId).notes);
 };
 export { deleteNote };

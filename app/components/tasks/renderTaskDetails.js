@@ -6,6 +6,8 @@ import taskLinkList from "./ui/taskLinkList";
 import taskNotesList from "./ui/taskNotesList";
 import { submitLinkTrigger } from "./lib/links/submitLink";
 import { getLinkId } from "./lib/links/getLinkId";
+import { submitNoteTrigger } from "./lib/notes/submitNote";
+import { getNoteId } from "./lib/notes/getNoteId";
 import deleteTaskTrigger from "./lib/deleteTask";
 import { getTask, getProject } from "../../helpers/localStorage.helper";
 
@@ -110,6 +112,12 @@ submitLinkTrigger();
 
 // Initialize edit link trigger
 getLinkId();
+
+// Initialize submit note trigger
+submitNoteTrigger();
+
+// Initialize edit link trigger
+getNoteId();
 
 // Initiaize delete task trigger
 deleteTaskTrigger();

@@ -22,6 +22,4 @@ const getNoteId = () => {
   });
 };
 
-//getNoteId();
-
 export { getNoteId };

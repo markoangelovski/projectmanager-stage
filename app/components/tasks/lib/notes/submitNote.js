@@ -1,10 +1,13 @@
-import getProjectDetails from "../../../../lib/getProjectDetails";
-import { submitNoteCall } from "../../../../drivers/note.driver";
+import { submitNoteCall } from "../../../../drivers/Task/note.driver";
+import {
+  getTask,
+  setUpdatedTask
+} from "../../../../helpers/localStorage.helper";
 import taskNotesList from "../../ui/taskNotesList";
 import spinner from "../../../../lib/spinner";
 import { alertSuccess, alertError } from "../../../../lib/alerts";
 
-const submitNote = () => {
+const submitNoteTrigger = () => {
   // Get submit Note button
   document
     .getElementById("task-note-submit")
@@ -25,11 +28,10 @@ const submitNote = () => {
 
         // Check for any returned server errors
         if (!submitted.error) {
-          // Re-fetch data
-          await getProjectDetails();
-
           // Set notificaton
           alertSuccess(submitted.message);
+          // Set link to local storage
+          setUpdatedTask(submitted.task, submitted.task.project);
         } else {
           alertError(submitted.message);
           spinner(false);
@@ -40,16 +42,13 @@ const submitNote = () => {
         alertError(error);
       }
 
-      // Re-render task details
-      const updatedTask = JSON.parse(localStorage.getItem("tasks")).find(
-        upatedTask => upatedTask._id === task
-      );
-
       // Re-render notes list to DOM
       const notesList = document.getElementById("task-notes-list-display");
       while (notesList.firstChild) notesList.removeChild(notesList.firstChild);
-      notesList.innerHTML = taskNotesList(updatedTask.notes);
+      notesList.innerHTML = taskNotesList(getTask(task).notes);
 
       spinner(false);
     });
 };
+
+export { submitNoteTrigger };

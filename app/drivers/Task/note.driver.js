@@ -1,8 +1,10 @@
-const { api } = require(`../../config/${process.env.API_CONFIG}`);
+const {
+  pmBackend: { api, apiversion }
+} = require(`../../../config/${process.env.API_CONFIG}`);
 
 const submitNoteCall = (task, payload) => {
   return new Promise((resolve, reject) => {
-    fetch(`${api}/notes/${task}`, {
+    fetch(`${api}/${apiversion}/notes/${task}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -17,7 +19,7 @@ const submitNoteCall = (task, payload) => {
 
 const editNoteCall = (noteId, payload) => {
   return new Promise((resolve, reject) => {
-    fetch(`${api}/notes/${noteId}/?note=${payload}`, {
+    fetch(`${api}/${apiversion}/notes/${noteId}/?note=${payload}`, {
       method: "PATCH"
     })
       .then(res => res.json())
@@ -28,7 +30,7 @@ const editNoteCall = (noteId, payload) => {
 
 const deleteNoteCall = (taskId, noteId) => {
   return new Promise((resolve, reject) => {
-    fetch(`${api}/notes/${taskId}?noteId=${noteId}`, {
+    fetch(`${api}/${apiversion}/notes/${taskId}?noteId=${noteId}`, {
       method: "DELETE"
     })
       .then(res => res.json())
