@@ -1,7 +1,9 @@
 import { updateTaskCall } from "../../../drivers/Task/task.driver";
-import { getProjectDetails } from "../../../drivers/Project/project.driver";
 import renderTasks from "../renderTasksKanboard";
-import { getProject } from "../../../helpers/localStorage.helper";
+import {
+  getProject,
+  setUpdatedTask
+} from "../../../helpers/localStorage.helper";
 import spinner from "../../../lib/spinner";
 import { alertSuccess, alertError } from "../../../lib/alerts";
 
@@ -38,7 +40,10 @@ const changeColumnApiCall = async (taskId, attributeKey, attributeValue) => {
     );
 
     if (!updatedTask.error) {
-      await getProjectDetails();
+      // Update task in local storage
+      setUpdatedTask(updatedTask.task, updatedTask.task.project);
+
+      // Set notification
       alertSuccess(updatedTask.message);
     } else {
       console.warn(updatedTask.message);
