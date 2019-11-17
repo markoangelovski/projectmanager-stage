@@ -7,6 +7,7 @@
   "scripts": {
     "start": "webpack-dev-server --env dev --mode development",
     "build-stage": "webpack --env stage",
+    "deploy-stage": "node deploy/staging",
     "build-prod": "webpack --env prod"
   },
   "keywords": [],
