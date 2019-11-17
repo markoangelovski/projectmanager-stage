@@ -1,6 +1,7 @@
 import { setTask } from "../../../helpers/localStorage.helper";
 import { createTaskCall } from "../../../drivers/Task/task.driver";
 import displayTaskDetails from "./displayTaskDetails";
+import spinner from "../../../lib/spinner";
 import { alertSuccess, alertError } from "../../../lib/alerts";
 
 const createTaskTrigger = () => {
@@ -18,6 +19,8 @@ const createTaskTrigger = () => {
 };
 async function createTask(e) {
   e.preventDefault();
+
+  spinner(true);
 
   // Create task data payload
   const payload = {
@@ -43,14 +46,17 @@ async function createTask(e) {
 
       // Save new task to local storage
       setTask(taskResponse.task, payload.project);
+      spinner(false);
     } else {
       // In case of errors display error message
       console.warn(taskResponse.message);
       alertError(taskResponse.message);
+      spinner(false);
     }
   } catch (error) {
     console.warn(error);
     alertError(error);
+    spinner(false);
   }
 }
 

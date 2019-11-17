@@ -4,7 +4,6 @@ import renderTasks from "../tasks/renderTasksKanboard";
 import displayProject from "./lib/displayProject";
 import createProjectTrigger from "./lib/createProject";
 import deleteProjectTrigger from "./lib/deleteProject";
-import router from "../../router/router";
 
 // Set breadcrumbs
 document.querySelector(".breadcrumb-item.active").innerHTML = "Overview";
