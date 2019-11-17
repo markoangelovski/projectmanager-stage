@@ -1,9 +1,9 @@
 const ghpages = require("gh-pages");
 
 ghpages.publish(
-  "stage",
+  "prod",
   {
-    remote: "remote-staging",
+    remote: "remote-production",
     user: {
       name: "Angelovski",
       email: "marko.angelovsk@gmail.com"
