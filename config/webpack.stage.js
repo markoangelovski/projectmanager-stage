@@ -54,7 +54,7 @@ module.exports = {
           { from: "assets/css", to: "/css" },
           { from: "assets/fonts", to: "/fonts" },
           { from: "assets/js", to: "/js" },
-          { from: "config/prod.txt", to: "../robots.txt" }
+          { from: "config/stage.txt", to: "../robots.txt" }
         ],
         links: [
           { path: "css/bootstrap.min.css" },
