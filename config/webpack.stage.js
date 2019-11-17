@@ -15,7 +15,7 @@ module.exports = {
   output: {
     filename: "assets/[name]-chunk-[contentHash].js",
     chunkFilename: "assets/[name]-chunk-[chunkHash].js",
-    path: path.resolve(__dirname, "../dist")
+    path: path.resolve(__dirname, "../stage")
   },
   optimization: {
     minimizer: [new OptimizeCssAssetsPlugin(), new TerserPlugin()],
