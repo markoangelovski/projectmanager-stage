@@ -182,7 +182,9 @@ export const projectManagerBody = `
 
         <!-- LOGO -->
         <div class="logo-box">
-            <a href="/" class="logo text-center">
+            <a href="${
+              process.env.API_CONFIG === "stage" ? "/projectmanager-stage" : "/"
+            }" class="logo text-center">
                 <span class="logo-lg">
                     <img src="./assets/images/JS-logo.svg" alt="Project Manager">
                     <span class="logo-lg-text-light">Project Manager</span>
