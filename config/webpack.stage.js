@@ -34,7 +34,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      "process.env.API_CONFIG": JSON.stringify("prod")
+      "process.env.API_CONFIG": JSON.stringify("stage")
     }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({

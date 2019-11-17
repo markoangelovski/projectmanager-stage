@@ -7,7 +7,7 @@
   "scripts": {
     "start": "webpack-dev-server --env dev --mode development",
     "build-stage": "webpack --env stage",
-    "deploy-stage": "node deploy/staging",
+    "deploy-stage": "git push -u remote-staging branch-staging && webpack --env stage && node deploy/staging",
     "build-prod": "webpack --env prod",
     "deploy-prod": "git push -u remote-production master && webpack --env prod && node deploy/production"
   },
