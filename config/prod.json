@@ -2,5 +2,6 @@
   "pmBackend": {
     "api": "http://localhost:3000",
     "apiversion": "v1"
-  }
+  },
+  "CNAME": "projectmanager.angelovski.ga"
 }

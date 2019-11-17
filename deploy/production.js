@@ -2,10 +2,9 @@ const fs = require("fs");
 const path = require("path");
 const ghpages = require("gh-pages");
 
-fs.writeFileSync(
-  path.join(__dirname, "../", "prod", "CNAME"),
-  "projectmanager.angelovski.ga"
-);
+const { CNAME } = require("../config/prod.json");
+
+fs.writeFileSync(path.join(__dirname, "../", "prod", "CNAME"), CNAME);
 
 ghpages.publish(
   "prod",
