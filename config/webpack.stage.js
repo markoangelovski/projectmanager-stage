@@ -54,6 +54,7 @@ module.exports = {
           { from: "assets/css", to: "/css" },
           { from: "assets/fonts", to: "/fonts" },
           { from: "assets/js", to: "/js" },
+          { from: "assets/images/JS-logo.svg", to: "/images/JS-logo.svg" },
           { from: "config/stage.txt", to: "../robots.txt" }
         ],
         links: [
