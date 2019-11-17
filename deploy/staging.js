@@ -10,6 +10,9 @@ ghpages.publish(
     }
   },
   function(err) {
-    console.warn(err);
+    if (err) throw err;
+    console.log(
+      "Deploy to https://markoangelovski.github.io/projectmanager-stage completed."
+    );
   }
 );

@@ -8,7 +8,8 @@
     "start": "webpack-dev-server --env dev --mode development",
     "build-stage": "webpack --env stage",
     "deploy-stage": "node deploy/staging",
-    "build-prod": "webpack --env prod"
+    "build-prod": "webpack --env prod",
+    "deploy-prod": "node deploy/production"
   },
   "keywords": [],
   "author": "",
