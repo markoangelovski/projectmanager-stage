@@ -9,7 +9,9 @@ const createTaskCall = payload => {
       headers: {
         "Content-type": "application/json"
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      // Credentials: include for sending the cookie from the browser to the backend
+      credentials: "include"
     })
       .then(res => res.json())
       .then(json => resolve(json))
@@ -30,7 +32,9 @@ const updateTaskCall = (taskId, attributeKey, attributeValue) => {
       headers: {
         "Content-type": "application/json"
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      // Credentials: include for sending the cookie from the browser to the backend
+      credentials: "include"
     })
       .then(res => res.json())
       .then(json => resolve(json))
@@ -41,7 +45,9 @@ const updateTaskCall = (taskId, attributeKey, attributeValue) => {
 const deleteTaskCall = taskId => {
   return new Promise((resolve, reject) => {
     fetch(`${api}/${apiversion}/tasks/${taskId}`, {
-      method: "DELETE"
+      method: "DELETE",
+      // Credentials: include for sending the cookie from the browser to the backend
+      credentials: "include"
     })
       .then(res => res.json())
       .then(json => resolve(json))

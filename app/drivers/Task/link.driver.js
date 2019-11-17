@@ -9,7 +9,9 @@ const submitLinkCall = (task, payload) => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      // Credentials: include for sending the cookie from the browser to the backend
+      credentials: "include"
     })
       .then(res => res.json())
       .then(json => resolve(json))
@@ -20,7 +22,9 @@ const submitLinkCall = (task, payload) => {
 const editLinkCall = (linkId, payload) => {
   return new Promise((resolve, reject) => {
     fetch(`${api}/${apiversion}/links/${linkId}/?link=${payload}`, {
-      method: "PATCH"
+      method: "PATCH",
+      // Credentials: include for sending the cookie from the browser to the backend
+      credentials: "include"
     })
       .then(res => res.json())
       .then(json => resolve(json))
@@ -31,7 +35,9 @@ const editLinkCall = (linkId, payload) => {
 const deleteLinkCall = (taskId, linkId) => {
   return new Promise((resolve, reject) => {
     fetch(`${api}/${apiversion}/links/${taskId}?linkId=${linkId}`, {
-      method: "DELETE"
+      method: "DELETE",
+      // Credentials: include for sending the cookie from the browser to the backend
+      credentials: "include"
     })
       .then(res => res.json())
       .then(json => resolve(json))

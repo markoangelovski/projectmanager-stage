@@ -4,7 +4,10 @@ const {
 
 const apiCall = async url => {
   return new Promise((resolve, reject) => {
-    fetch(`${api}/${apiversion}/${url}`)
+    fetch(`${api}/${apiversion}/${url}`, {
+      // Credentials: include for sending the cookie from the browser to the backend
+      credentials: "include"
+    })
       .then(res => res.json())
       .then(json => resolve(json))
       .catch(error => reject(error));
@@ -18,7 +21,9 @@ const apiCallPost = async (payload, url) => {
       headers: {
         "Content-type": "application/json"
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      // Credentials: include for sending the cookie from the browser to the backend
+      credentials: "include"
     })
       .then(res => res.json())
       .then(json => resolve(json))
@@ -29,7 +34,9 @@ const apiCallPost = async (payload, url) => {
 const apiCallDelete = async (id, url) => {
   return new Promise((resolve, reject) => {
     fetch(`${api}/${apiversion}/${url}/${id}`, {
-      method: "DELETE"
+      method: "DELETE",
+      // Credentials: include for sending the cookie from the browser to the backend
+      credentials: "include"
     })
       .then(res => res.json())
       .then(json => resolve(json))
