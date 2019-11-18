@@ -18,7 +18,7 @@ ghpages.publish(
   function(err) {
     if (err) throw err;
     console.log(
-      "Deploy to https://markoangelovski.github.io/projectmanager completed."
+      "Deploy to https://markoangelovski.github.io/projectmanager-prod completed."
     );
   }
 );
