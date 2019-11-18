@@ -1,6 +1,6 @@
 {
   "pmBackend": {
-    "api": "https://projectmanager-prod.herokuapp.com/",
+    "api": "https://projectmanager-prod.herokuapp.com",
     "apiversion": "v1"
   },
   "CNAME": "projectmanager.angelovski.ga"
