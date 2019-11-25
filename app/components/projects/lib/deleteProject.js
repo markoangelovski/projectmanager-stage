@@ -1,7 +1,7 @@
 import displayProject from "./displayProject";
 import kanboardTitle from "../../kanboard-title/kanboardTitle";
 import { apiCallDelete } from "../../../helpers/api.helper";
-import { getProject } from "../../../helpers/localStorage.helper";
+import { removeProject } from "../../../helpers/localStorage.helper";
 import leftSidebar from "../../left-sidebar/leftSidebar";
 import spinner from "../../../lib/spinner";
 import { alertError, alertSuccess } from "../../../lib/alerts";
@@ -39,10 +39,9 @@ async function deleteProject(id) {
     alertSuccess(deletedProject.message);
 
     // Remove deleted project from local storage
-    localStorage.projects = JSON.stringify(
-      getProject().filter(project => project._id !== id)
-    );
-    localStorage.projectCount = parseInt(localStorage.projectCount) - 1;
+    removeProject(id);
+
+    // Reset project count in left sidebar
     document.getElementById("project-count").innerText =
       localStorage.projectCount;
 

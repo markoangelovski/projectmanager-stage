@@ -20,8 +20,8 @@ export default function displayTaskDetails(taskResponse) {
     "task-description"
   ).parentElement.innerHTML = `<p class="col-form-label">${taskResponse.task.description}</p>`;
   document.getElementById(
-    "task-owner"
-  ).parentElement.innerHTML = `<p class="col-form-label">${taskResponse.task.owner}</p>`;
+    "task-pl"
+  ).parentElement.innerHTML = `<p class="col-form-label">${taskResponse.task.pl}</p>`;
   document.getElementById(
     "task-column"
   ).parentElement.innerHTML = `<p class="col-form-label">${taskResponse.task.column}</p>`;

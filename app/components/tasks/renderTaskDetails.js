@@ -52,9 +52,7 @@ function displayTaskDetails(taskId) {
   taskTitle.dataset.anchor = taskId;
 
   // Set Task Owner
-  document.getElementById("task-owner-display").innerText = task.owner
-    ? task.owner
-    : "";
+  document.getElementById("task-pl-display").innerText = task.pl ? task.pl : "";
   // Set Task Description
   document.getElementById("task-description-display").innerText =
     task.description;
