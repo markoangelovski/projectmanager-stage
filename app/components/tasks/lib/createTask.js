@@ -27,7 +27,7 @@ async function createTask(e) {
     project: document.getElementById("project-details-link").dataset.anchor,
     title: document.getElementById("task-title").value,
     description: document.getElementById("task-description").value,
-    owner: document.getElementById("task-owner").value,
+    pl: document.getElementById("task-pl").value,
     column: document.getElementById("task-column").value,
     kanboard: document.getElementById("task-kanboard-url").value,
     nas: document.getElementById("task-nas-path").value,

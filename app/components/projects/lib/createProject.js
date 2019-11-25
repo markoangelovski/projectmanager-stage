@@ -1,11 +1,12 @@
+import kanboardTitle from "../../kanboard-title/kanboardTitle";
 import { apiCallPost } from "../../../helpers/api.helper";
-import { getProject } from "../../../helpers/localStorage.helper";
+import { setProject } from "../../../helpers/localStorage.helper";
 import { alertSuccess, alertError } from "../../../lib/alerts";
 
 // Get Placeholders
 const title = document.getElementById("project-title");
 const description = document.getElementById("project-description");
-const owner = document.getElementById("project-owner");
+const pl = document.getElementById("project-pl");
 const nas = document.getElementById("nas-path");
 const kanboard = document.getElementById("kanboard-url");
 const dev = document.getElementById("dev-url");
@@ -26,7 +27,7 @@ async function createProject(e) {
   const payload = {
     title: title.value,
     description: description.value,
-    owner: owner.value,
+    pl: pl.value,
     kanboard: kanboard.value,
     dev: dev.value,
     stage: stage.value,
@@ -43,13 +44,16 @@ async function createProject(e) {
     displayProjectDetails(projectResponse);
 
     // Save new project to local storage
-    localStorage.projects = JSON.stringify([
-      ...getProject(),
-      projectResponse.project
-    ]);
-    localStorage.projectCount = parseInt(localStorage.projectCount) + 1;
-    document.getElementById("project-overview").innerText =
-      localStorage.projectCount;
+    setProject(projectResponse.project);
+
+    // Set Kanboard title
+    kanboardTitle({
+      title: "Overview",
+      projectCount: localStorage.projectCount,
+      taskCount: localStorage.taskCount
+    });
+
+    // Set left sidebar badge project count
     document.getElementById("project-count").innerText =
       localStorage.projectCount;
   } catch (error) {
@@ -71,7 +75,7 @@ function displayProjectDetails(projectResponse) {
   // Parent element references
   let reftitle = title.parentElement;
   let refdescription = description.parentElement;
-  let refowner = owner.parentElement;
+  let refpl = pl.parentElement;
   let refnas = nas.parentElement;
   let refkanboard = kanboard.parentElement;
   let refdev = dev.parentElement;
@@ -87,8 +91,8 @@ function displayProjectDetails(projectResponse) {
     "project-description"
   ).parentElement.innerHTML = `<p class="col-form-label">${projectResponse.project.description}</p>`;
   document.getElementById(
-    "project-owner"
-  ).parentElement.innerHTML = `<p class="col-form-label">${projectResponse.project.owner}</p>`;
+    "project-pl"
+  ).parentElement.innerHTML = `<p class="col-form-label">${projectResponse.project.pl}</p>`;
   document.getElementById(
     "nas-path"
   ).parentElement.innerHTML = `<p class="col-form-label">${projectResponse.project.nas}</p>`;
@@ -132,7 +136,7 @@ function displayProjectDetails(projectResponse) {
     // Reset Create Project form fields
     reftitle.innerHTML = `<div class="col-sm-10"><input type="text" class="form-control" id="project-title" placeholder="Project title" required=""><span class="help-block"><small id="warning-message"></small></span></div>`;
     refdescription.innerHTML = `<div class="col-sm-10"><textarea class="form-control" id="project-description" rows="5" placeholder="Enter a brief description of the project" style="margin-top: 0px; margin-bottom: 0px; height: calc(1.5em + .9rem + 2px);"></textarea></div>`;
-    refowner.innerHTML = `<div class="col-sm-10"><input type="text" class="form-control" id="project-owner" placeholder="Project owner"></div>`;
+    refpl.innerHTML = `<div class="col-sm-10"><input type="text" class="form-control" id="project-pl" placeholder="Project owner"></div>`;
     refnas.innerHTML = `<div class="col-sm-10"><input type="text" class="form-control" id="nas-path" placeholder="Enter path to project folder on NAS"></div>`;
     refkanboard.innerHTML = `<div class="col-md-10"><input class="form-control" type="url" id="kanboard-url" name="kanboard-url" placeholder="Link to Project's board in Kanban"></div>`;
     refdev.innerHTML = `<div class="col-md-10"><input class="form-control" type="url" id="dev-url" name="dev-url" placeholder="Link to Dev environment"></div>`;
@@ -148,7 +152,7 @@ function displayProjectDetails(projectResponse) {
     // Set Continue button
     const continueButton = document.getElementById("continue");
     continueButton.setAttribute("style", "display:none");
-    import(/* webpackChunkName: "create-project-reset"*/ "./createProject");
+    // import(/* webpackChunkName: "create-project-reset"*/ "./createProject");
   });
 }
 

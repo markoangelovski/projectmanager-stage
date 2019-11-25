@@ -18,8 +18,8 @@ export default function renderProjectDetails(project) {
 
   // Set Project Title
   document.getElementById("project-title-display").innerText = project.title;
-  // Set Project Owner
-  document.getElementById("project-owner-display").innerText = project.owner;
+  // Set Project Leader
+  document.getElementById("project-pl-display").innerText = project.pl;
   // Set Project Description
   document.getElementById("project-description-display").innerText =
     project.description;

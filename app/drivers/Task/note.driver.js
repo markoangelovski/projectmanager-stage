@@ -21,7 +21,7 @@ const submitNoteCall = (task, payload) => {
 
 const editNoteCall = (noteId, payload) => {
   return new Promise((resolve, reject) => {
-    fetch(`${api}/${apiversion}/notes/${noteId}/?note=${payload}`, {
+    fetch(`${api}/${apiversion}/notes/${noteId}?note=${payload}`, {
       method: "PATCH",
       // Credentials: include for sending the cookie from the browser to the backend
       credentials: "include"
