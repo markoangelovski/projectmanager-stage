@@ -10,9 +10,23 @@ const getProject = id => {
 };
 
 const setProject = project => {
-  const projects = JSON.parse(localStorage.projects);
-  localStorage.projects = JSON.stringify([...projects, project]);
+  localStorage.projects = JSON.stringify([...getProject(), project]);
+  localStorage.projectCount = parseInt(localStorage.projectCount) + 1;
+
   return project;
+};
+
+const removeProject = projectId => {
+  localStorage.projects = JSON.stringify(
+    getProject().filter(project => project._id !== projectId)
+  );
+  localStorage.projectCount = parseInt(localStorage.projectCount) - 1;
+
+  const tasks = JSON.parse(localStorage.tasks).filter(
+    task => task.project._id !== projectId
+  );
+  localStorage.tasks = JSON.stringify(tasks);
+  localStorage.taskCount = tasks.length;
 };
 
 const getTask = id => {
@@ -77,4 +91,12 @@ const setUpdatedTask = (task, projectId) => {
   return "Task set";
 };
 
-export { getProject, setProject, getTask, setTask, removeTask, setUpdatedTask };
+export {
+  getProject,
+  setProject,
+  removeProject,
+  getTask,
+  setTask,
+  removeTask,
+  setUpdatedTask
+};

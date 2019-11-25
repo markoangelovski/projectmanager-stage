@@ -41,7 +41,7 @@ const changeColumnApiCall = async (taskId, attributeKey, attributeValue) => {
 
     if (!updatedTask.error) {
       // Update task in local storage
-      setUpdatedTask(updatedTask.task, updatedTask.task.project);
+      setUpdatedTask(updatedTask.task, updatedTask.task.project._id);
 
       // Set notification
       alertSuccess(updatedTask.message);

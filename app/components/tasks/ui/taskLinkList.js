@@ -4,7 +4,6 @@ const taskLinkList = links => {
   // Set Link list placeholder
   const linkPlaceholder = document.createDocumentFragment();
   links.forEach(link => {
-    // console.log("link :", link);
     // Create Table row for each Link
     const placeholder = document.createElement("tr");
 

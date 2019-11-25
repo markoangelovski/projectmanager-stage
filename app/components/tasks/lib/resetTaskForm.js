@@ -21,8 +21,7 @@ export default async function resetTaskForm() {
   );
 
   // Re-render project title
-  const projectCount = localStorage.getItem("projectCount") || 0;
-  const taskCount = localStorage.getItem("taskCount") || 0;
+  const taskCount = selectedProject.tasks.length;
   const title = {
     title: selectedProject.title,
     taskCount
@@ -51,8 +50,8 @@ export default async function resetTaskForm() {
   ).nextElementSibling.innerHTML = `<textarea class="form-control" id="task-description" rows="5" placeholder="Enter a brief description of the task" style="margin-top: 0px; margin-bottom: 0px; height: calc(1.5em + .9rem + 2px);"></textarea>`;
 
   document.querySelector(
-    'label[for="task-owner"]'
-  ).nextElementSibling.innerHTML = `<input type="text" class="form-control" id="task-owner" placeholder="Task owner">`;
+    'label[for="task-pl"]'
+  ).nextElementSibling.innerHTML = `<input type="text" class="form-control" id="task-pl" placeholder="Task owner">`;
 
   document.querySelector(
     'label[for="task-column"]'

@@ -561,7 +561,7 @@ export const projectManagerBody = `
                               <div class="row">
                                  <div class="col-md-6">
                                     <div class="mt-3">
-                                       <p><b>Owner: <span id="project-owner-display"></span></b></p>
+                                       <p><b>Project Leader: <span id="project-pl-display"></span></b></p>
                                        <p id="project-description-display" class="text-muted"></p>
                                     </div>
                                  </div>
@@ -680,7 +680,7 @@ export const projectManagerBody = `
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mt-3">
-                                        <p><b>Owner: <span id="task-owner-display"></span></b></p>
+                                        <p><b>Project Leader: <span id="task-pl-display"></span></b></p>
                                         <p id="task-description-display" class="text-muted"></p>
                                     </div>
                                 </div>
@@ -1021,9 +1021,9 @@ export const projectManagerBody = `
                             </div>
                          </div>
                          <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="project-owner">Owner:</label>
+                            <label class="col-sm-2 col-form-label" for="project-pl">Project Leader:</label>
                             <div class="col-sm-10">
-                               <input type="text" class="form-control" id="project-owner" placeholder="Project owner">
+                               <input type="text" class="form-control" id="project-pl" placeholder="Enter Project Leader's name">
                             </div>
                          </div>
                          <div class="form-group row">
@@ -1111,9 +1111,9 @@ export const projectManagerBody = `
                             </div>
                          </div>
                          <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="task-owner">Owner:</label>
+                            <label class="col-sm-2 col-form-label" for="task-pl">Project Leader:</label>
                             <div class="col-sm-10">
-                               <input type="text" class="form-control" id="task-owner" placeholder="Task owner">
+                               <input type="text" class="form-control" id="task-pl" placeholder="Task owner">
                             </div>
                          </div>
                          <div class="form-group row">
