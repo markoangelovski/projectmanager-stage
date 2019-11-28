@@ -88,7 +88,7 @@ export default function displayProject(e) {
       renderTasks(tasks);
     } else {
       // Project does not have tasks, set one empty task
-      renderTasks([{ project: "" }]);
+      renderTasks([{ project: "", owner: { avatar_url: "" } }]);
     }
   } else if (e.target.innerText === "Details") {
     renderProjectDetails(getProject(e.target.dataset.anchor));
