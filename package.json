@@ -10,7 +10,7 @@
     "deploy-stage": "git push -u remote-staging branch-staging && webpack --env stage && node deploy/staging",
     "build-prod": "webpack --env prod",
     "deploy-prod": "git push -u remote-production master && webpack --env prod && node deploy/production",
-    "housekeeping": "git push -u remote-staging master && git push -u remote-production branch-staging"
+    "housekeeping": "git push -u remote-staging master && git push -u remote-production branch-staging && git push -u remote-staging branch-staging && git push -u remote-production master"
   },
   "keywords": [],
   "author": "",
