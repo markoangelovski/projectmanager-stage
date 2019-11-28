@@ -3,6 +3,7 @@ import writeTask from "./ui/writeTask";
 import clearTasksUI from "./lib/clearTasksUI";
 import renderTaskDetails from "./renderTaskDetails";
 import changeColumn from "./lib/changeColumn";
+import { getTask } from "../../helpers/localStorage.helper";
 
 export default function renderTasks(tasks) {
   // Clear UI
@@ -31,6 +32,7 @@ export default function renderTasks(tasks) {
     tasksToRender.forEach(task => {
       const taskData = {
         taskId: task._id,
+        taskOwner: task.owner.avatar_url || getTask(task._id).owner.avatar_url,
         taskTitle: task.title,
         taskDescription: task.description,
         projectTitle: task.project.title,

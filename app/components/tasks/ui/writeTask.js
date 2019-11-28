@@ -1,7 +1,6 @@
-import users from "../../../../config/users";
-
 export default function writeTask({
   taskId = "",
+  taskOwner = "",
   taskTitle = "",
   taskDescription = "",
   projectTitle = "",
@@ -104,7 +103,7 @@ export default function writeTask({
   imageLink.setAttribute("href", "javascript: void(0);");
   imageLink.setAttribute("class", "text-muted");
   const image = document.createElement("img");
-  image.setAttribute("src", `${users[0].img}`);
+  image.setAttribute("src", taskOwner);
   image.setAttribute("alt", "task-user");
   image.setAttribute("class", "avatar-sm img-thumbnail rounded-circle");
   imageLink.appendChild(image);

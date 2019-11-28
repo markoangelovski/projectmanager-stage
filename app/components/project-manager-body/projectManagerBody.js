@@ -23,13 +23,7 @@ export const projectManagerBody = `
                     <div class="dropdown-divider" style="display: none;"></div>
                     <!-- items-->
                 </div>
-            </li>
-
-            <li class="dropdown notification-list">
-                <a class="nav-link" href="#">
-                    <i class="fe-refresh-ccw text-danger"></i>
-                </a>
-            </li>             
+            </li>            
 
             <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -124,9 +118,9 @@ export const projectManagerBody = `
 
             <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <img alt="user-image" class="rounded-circle">
-                    <span class="pro-user-name ml-1">
-                        Nik Patel <i class="mdi mdi-chevron-down"></i> 
+                    <img alt="user-image" class="rounded-circle user-avatar">
+                    <span class="pro-user-name ml-1"><span class="user-name"></span>
+                         <i class="mdi mdi-chevron-down"></i> 
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
