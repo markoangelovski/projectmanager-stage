@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{21:function(e,t,r){"use strict";r.r(t);t.default=(()=>{document.querySelector(".user-avatar").src=JSON.parse(localStorage.user).avatar_url;const e=document.querySelector(".user-name");e.textContent=JSON.parse(localStorage.user).email.split("@")[0],e.setAttribute("style","text-transform: capitalize;")})()}}]);
