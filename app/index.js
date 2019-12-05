@@ -40,6 +40,7 @@ export const renderProjectManager = async () => {
     } = require("./components/project-manager-body/projectManagerBody");
     body.insertAdjacentHTML("afterbegin", projectManagerBody);
     // Dynamic import for the rest of the app functionality
+    require("./lib/appInit");
     import(/* webpackChunkName: "app"*/ "./components/app");
   } catch (error) {
     // If backend is down render failiure message

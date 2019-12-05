@@ -1,6 +1,7 @@
 import { getProject } from "../helpers/localStorage.helper";
 import leftSidebar from "../components/left-sidebar/leftSidebar";
 import displayProject from "../components/projects/lib/displayProject";
+import { searchLeftSideBar } from "./searchLeftSideBar";
 
 const search = document.getElementById("search");
 search.addEventListener("keyup", displaySearch);
@@ -58,3 +59,6 @@ function displaySearch(e) {
     this.removeEventListener("click", handler);
   });
 }
+
+// Init left sidebar search
+searchLeftSideBar();

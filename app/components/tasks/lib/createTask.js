@@ -34,8 +34,6 @@ async function createTask(e) {
     dueDate: new Date(document.querySelector("#task-due-date").value).getTime()
   };
 
-  console.log(payload);
-
   // Send the data payload to API
   try {
     const taskResponse = await createTaskCall(payload);

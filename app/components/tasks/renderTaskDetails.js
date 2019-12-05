@@ -11,7 +11,7 @@ import { getNoteId } from "./lib/notes/getNoteId";
 import deleteTaskTrigger from "./lib/deleteTask";
 import { getTask, getProject } from "../../helpers/localStorage.helper";
 
-export default function renderTaskDetails() {
+function renderTaskDetails() {
   // Get titles of all tasks and init click event listener
   document
     .querySelectorAll(".task-title-link")
@@ -105,17 +105,22 @@ function displayTaskDetails(taskId) {
   subTaskList.appendChild(taskSubTaskList(task.subtasks));
 }
 
-// Initialize submit link trigger
-submitLinkTrigger();
+const taskDetailsTrigger = () => {
+  // Initialize submit link trigger
+  submitLinkTrigger();
+  
+  // Initialize edit link trigger
+  getLinkId();
+  
+  // Initialize submit note trigger
+  submitNoteTrigger();
+  
+  // Initialize edit link trigger
+  getNoteId();
+  
+  // Initiaize delete task trigger
+  deleteTaskTrigger();
+}
 
-// Initialize edit link trigger
-getLinkId();
 
-// Initialize submit note trigger
-submitNoteTrigger();
-
-// Initialize edit link trigger
-getNoteId();
-
-// Initiaize delete task trigger
-deleteTaskTrigger();
+export {renderTaskDetails, taskDetailsTrigger};
