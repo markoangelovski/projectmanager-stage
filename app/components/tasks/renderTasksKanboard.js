@@ -1,7 +1,7 @@
 import { formatDistanceStrict, format } from "date-fns";
 import writeTask from "./ui/writeTask";
 import clearTasksUI from "./lib/clearTasksUI";
-import renderTaskDetails from "./renderTaskDetails";
+import {renderTaskDetails} from "./renderTaskDetails";
 import changeColumn from "./lib/changeColumn";
 import { getTask } from "../../helpers/localStorage.helper";
 

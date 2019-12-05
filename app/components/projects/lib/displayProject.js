@@ -1,13 +1,17 @@
 import kanboardTitle from "../../kanboard-title/kanboardTitle";
+import kanboardInit from "../../kanboard/lib/kanboardInit";
 import renderTasks from "../../tasks/renderTasksKanboard";
 import createTaskTrigger from "../../tasks/lib/createTask";
 import renderProjectDetails from "../ui/renderProjectDetails";
 import { getProject } from "../../../helpers/localStorage.helper";
+import deleteProjectTrigger from "./deleteProject";
 
 // Render tasks of the selected Project
 export default function displayProject(e) {
   // Get placeholders
-  const kanboardPlaceholder = document.getElementById("kanboard-placeholder");
+  // const kanboardPlaceholder = document.getElementById("kanboard-placeholder");
+  kanboardInit();
+  deleteProjectTrigger();
   const projectDetailsPlaceholder = document.getElementById(
     "project-details-placeholder"
   );
@@ -29,7 +33,7 @@ export default function displayProject(e) {
     document.getElementById("overview-link").className = "";
 
     // Reset Kanboard visibility
-    kanboardPlaceholder.setAttribute("style", "display: flex");
+    // kanboardPlaceholder.setAttribute("style", "display: flex");
     projectDetailsPlaceholder.setAttribute("style", "display: none");
     taskDetailsPlaceholder.setAttribute("style", "display: none");
 
@@ -63,7 +67,7 @@ export default function displayProject(e) {
     createTaskTrigger();
 
     // Reset Kanboard visibility
-    kanboardPlaceholder.setAttribute("style", "display: flex");
+    // kanboardPlaceholder.setAttribute("style", "display: flex");
     projectDetailsPlaceholder.setAttribute("style", "display: none");
     taskDetailsPlaceholder.setAttribute("style", "display: none");
 

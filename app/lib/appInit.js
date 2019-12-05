@@ -1,8 +1,14 @@
-// Dynamic import of the entire Kanboard functionality
-// Loading eaach file sequentialy resulted in different errors on each pageload
-const kanboard = document.createElement("script");
-kanboard.setAttribute("type", "text/javascript");
-kanboard.setAttribute("src", "assets/js/kanboard.js");
+// Import of main app functionalities
+const vendor = document.createElement("script");
+vendor.setAttribute("type", "text/javascript");
+vendor.setAttribute("src", "assets/js/vendor.min.js");
+
+const app = document.createElement("script");
+app.setAttribute("type", "text/javascript");
+app.setAttribute("src", "assets/js/app.min.js");
 
 const body = document.getElementsByTagName("body")[0];
-body.appendChild(kanboard);
+body.appendChild(vendor);
+setTimeout(() => {
+  body.appendChild(app);
+}, 0);

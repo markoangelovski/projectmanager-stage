@@ -32,4 +32,17 @@ const logInCall = payload => {
   });
 };
 
-module.exports = { logInCall, checkAuthCall };
+const logOutCall = () => {
+  return new Promise((resolve, reject) => {
+    fetch(`${api}/${apiversion}/auth/logout`, {
+      method: "GET",
+      // Credentials: include for setting the cookie in browser
+      credentials: "include"
+    })
+      .then(res => res.json())
+      .then(token => resolve(token))
+      .catch(error => reject(error));
+  });
+};
+
+module.exports = { logInCall, logOutCall, checkAuthCall };
